@@ -1,2 +1,21 @@
 <h1>Register your pets here</h1>
+
+<form action="/register-pets" method="POST" enctype="multipart/form-data">
+  <label for="petsname">Pet's Name</label>
+  <input type="text" name="petsname" id="petsname">
+
+  <label for="breed">Breed</label>
+  <input type="text" name="breed" id="breed">
+
+  <label for="petsimage">Upload a Image </label>
+  <input type="file" name="petsimage" id="petsimage">
+
+  <button type="submit">Register Your Pets</button>
+
+</form>
 <a href="/">Homepage</a>
+
+
+{{#each user.pets}}
+<div>{{name}} </div>
+{{/each}}

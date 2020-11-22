@@ -5,7 +5,11 @@ const userSchema = new Schema (
   {
     username: String,
     password: String,
-    pets: [String],
+    pets: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Pet'
+    }],
+    
     likedPeople: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
