@@ -1,22 +1,23 @@
 <h1>Edit your pet here</h1>
-
-<form action="/users/{{pet._id}}" method="POST" enctype="multipart/form-data">
+{{#with pet}}
+<form action="/pets/{{this._id}}/edit" method="POST">
   <label for="petsname">Pet's Name</label>
-  <input type="text" name="petsname" id="petsname">
+  <input type="text" name="petsname" id="petsname" value="{{petsname}}">
 
   <label for="breed">Breed</label>
-  <input type="text" name="breed" id="breed">
+  <input type="text" name="breed" id="breed" value="{{breed}}">
 
-  <label for="petsimage">Upload an Image </label>
-  <input type="file" name="petsimage" id="petsimage">
+  {{!-- <label for="petsimage">Upload an Image </label>
+  <input type="file" name="petsimage" id="petsimage"> --}}
 
   <button type="submit">Edit</button>
 
 </form>
+{{/with}}
 <a href="/">Homepage</a>
 
 
-
+{{!-- 
 {{#each user.pets}}
 <div>{{name}} </div>
-{{/each}}
+{{/each}} --}}

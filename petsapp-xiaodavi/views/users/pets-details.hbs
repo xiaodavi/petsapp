@@ -8,12 +8,12 @@
 <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
 
 {{!-- here add links for edit or delete a pet --}}
-<a href="/user:id">Your Profile</a>
-<a href="/allPets">See All Other Pets</a>
+<a href="/pets/{{this._id}}/edit">Edit</a>
 
-{{!-- <a href="/pets">pet like page</a> --}}
-<a href="/users/{{pet._id}}/edit">Edit</a>
-<a href="/">Delete</a>
+<form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
+<button type="submit">Delete</button>
+</form>
+
 
 
 {{!-- pestapp.com/:userId/registerpet
@@ -22,6 +22,7 @@ pestapp.com/:userId/edit,delete
 pestapp.com/:userId/pets --}}
 
 
-
-
 {{/each}}
+
+<a href="/user/{{userProfile._id}}">Your Profile</a>
+<a href="/allPets">See All Other Pets</a>

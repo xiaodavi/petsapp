@@ -59,7 +59,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/userProfile", // need to be reviewed
+    successRedirect: "/register-pets", // need to be reviewed
     failureRedirect: "/login",
     passReqToCallback: true,
   }),

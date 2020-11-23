@@ -19,10 +19,10 @@ function ensureAuthenticated (req, res, next) {
 // Register pets page
 
 router.get("/register-pets", (req, res, next) => {
-  console.log(req.session);
+ // console.log(req.session);
   User.findById(req.session.passport.user)
     .then((user) => {
-      console.log(user);
+      // console.log(user);
       res.render("users/register-pets", { user: user });
     })
     .catch((err) => {
@@ -76,6 +76,14 @@ router.get('/allPets', ensureAuthenticated, (req, res, next) => {
   .catch(err => next(err))
 })
 
+router.get('/pets/:petsId', ensureAuthenticated, (req, res, next) => {
+  const petsId = req.params.petsId
+  Pet.findById(petsId)
+  .populate('owner')
+  .then(pet => {
+    res.render()
+  })
+})
 /* GET users page */
 // router.get("/users", (req, res, next) => {
 //   User.find()
@@ -134,9 +142,10 @@ router.get('/allPets', ensureAuthenticated, (req, res, next) => {
 //         })
 // });
 
-router.get('/users/:id/edit', (req, res, next) => {
-    Pet.findByIdAndUpdate(req.params.id)
+router.get('/pets/:id/edit', (req, res, next) => {
+     Pet.findById(req.params.id)
         .then(pet => {
+          console.log(pet)
             res.render('pets/edit', { pet });
         })
         .catch(err => {
@@ -144,20 +153,29 @@ router.get('/users/:id/edit', (req, res, next) => {
         });
 });
 
-router.post('/users/:id', (req, res, next) =>{
- const {petsname, breed, petsimage} = req.body;
- console.log(req.params.id)
- Pet.findByIdAndUpdate(req.params.id, {petsname, breed, petsimage})
+router.post('/pets/:id/edit', (req, res, next) =>{
+  console.log('hahaha')
+ const {petsname, breed} = req.body;
+ console.log(req.body)
+ console.log("params below this");
+ 
+ console.log(req.params.id);
+ //
+ Pet.findByIdAndUpdate(req.params.id, {petsname, breed})
  .then(()=> {
-   res.redirect("users/pets-details")
+   console.log('pet')
+   res.redirect("/pets")
+ }).catch(err => {
+   next(err);
  })
 })
 
 
-router.post('/users/:id/delete', (req, res, next) => {
-  Pet.findByIdAndRemove(req.params.id)
+router.post('/pets/:id/delete', (req, res, next) => {
+  const petsId = req.params.id
+  Pet.findByIdAndRemove(petsId)
   .then(() => {
-    res.redirect('users/:id');
+    res.redirect('/pets');
   })
   .catch(err => {
     next(err);
