@@ -15,11 +15,13 @@
 {{/unless}}
 
 {{#if user}}
-<div>
+<nav style='display:flex; justify-content: space-between'>
+  <div>
+    <a href="/">Home</a>
+    <a href="/register-pets">Register Your Pets</a>
+    <a href="/pets">See Your Pets</a>
+  </div>
   <a href="/logout">Log Out</a>
-</div>
-<div>
-  <a href="/register-pets">Home Page</a>
-</div>
+</nav>
 
 {{/if }}

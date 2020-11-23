@@ -7,7 +7,12 @@
 <p>Owner: {{this.owner.username}}</p>
 <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
 
-<button>Like💚</button>
+{{#if (isid this.owner._id)}}
+<form method='POST' action='/pets/like'>
+    <input type='hidden' value='{{this.owner._id}}' name='id' />
+    <button>Like💚</button>
+</form>
+{{/if}}
 
 
 {{/each}}
