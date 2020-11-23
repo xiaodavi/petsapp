@@ -9,12 +9,16 @@ const userSchema = new Schema (
       type: Schema.Types.ObjectId,
       ref: 'Pet'
     }],
-    
+
     likedPeople: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
     }],
-    googleID: String
+    googleID: String,
+    // role: {
+    //   type: String,
+    //   enum: ['admin', 'user']
+    // }
   }, 
   
   {
