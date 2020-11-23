@@ -1,7 +1,6 @@
 {{#unless user}}
-
 <h1>WELCOME</h1>
-  {{!-- {{#if user}}
+{{!-- {{#if user}}
   {{user.name}} 
   {{/if}} --}}
 <div>
@@ -13,15 +12,14 @@
 <div>
   <a href="/signup">Sign Up</a>
 </div>
+{{/unless}}
 
+{{#if user}}
 <div>
   <a href="/logout">Log Out</a>
 </div>
+<div>
+  <a href="/register-pets">Home Page</a>
+</div>
 
-{{/unless}}
-  
-
-
-
-
-
+{{/if }}
