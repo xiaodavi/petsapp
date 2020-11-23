@@ -6,6 +6,16 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { uploader, cloudinary } = require('../config/cloudinary');
 
+// middleware function
+function ensureAuthenticated (req, res, next) {
+  if(req.isAuthenticated ()) {
+    // the user is authenticated
+    return next()
+  } else {
+    res.render('/login')
+  }
+}
+
 // Register pets page
 
 router.get("/register-pets", (req, res, next) => {
@@ -20,27 +30,40 @@ router.get("/register-pets", (req, res, next) => {
     });
 });
 
-router.post("/register-pets", uploader.single('petsimage'), (req, res, next) => {
-  console.log('hahaah')
-  const {petsname, breed} = req.body;
-  console.log(petsname)
+//
+router.post("/register-pets", ensureAuthenticated, uploader.single('petsimage'), (req, res, next) => {
+  // console.log('hahaah')
+  const { petsname, breed } = req.body;
+  const { _id } = req.user;
+  // console.log(petsname)
   const petsimage = req.file.path;
-  console.log(req.session.passport.user);
+  // console.log(req.session.passport.user);
   
   Pet.create({
     petsname,
     breed,
     petsimage,
-    owner: req.session.passport.user
+    // owner: req.session.passport.user,
+    owner: _id
   })
-  .then(pet =>{
-    res.render("users/pets-details", {pet})
-  }).catch(err => {
+  .then(dbPet => {
+    return User.findByIdAndUpdate(req.user._id, {$push: {pets: dbPet._id }})
+  })
+  .then(() => res.redirect('/pets'))
+  .catch(err => {
     next(err);
   })
 })
 
-
+// list all pets of the owner
+router.get('/pets', ensureAuthenticated, (req, res, next) => {
+  const { _id } =req.user;
+  Pet.find({owner: _id})
+  .then(myPets => {
+    res.render('users/pets-details', {pets: myPets});
+  })
+  .catch(err => next(err));
+})
 
 /* GET users page */
 // router.get("/users", (req, res, next) => {
@@ -87,5 +110,18 @@ router.post("/register-pets", uploader.single('petsimage'), (req, res, next) => 
 
 //   // })
 // });
+
+//UPDATE /:id/edit
+
+//DELETE
+// router.delete("/edit/:id", (req,res) =>{
+//   const {id} = req.params;
+//   Pet.findByIdAndRemove(id)
+//   .then(() => {
+//     res.redirect("register-pets")
+//   }).catch(err =>{ 
+//     next()
+//   })
+
 
 module.exports = router;

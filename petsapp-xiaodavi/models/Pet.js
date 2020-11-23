@@ -11,7 +11,7 @@ const petSchema = new Schema (
       ref: "User",
     }
   }, 
-  
+
   {
     timestamps: {
       createdAt: "created_at",
@@ -22,3 +22,4 @@ const petSchema = new Schema (
 
 
 module.exports = model('Pet', petSchema);
+

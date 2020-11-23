@@ -153,9 +153,11 @@ app.use(passport.session());
 
 const index = require("./routes/index");
 app.use("/", index);
-const users = require("./routes/users");
-app.use("/", users);
 const auth = require("./routes/auth");
 app.use("/", auth);
+const pets = require("./routes/pets");
+app.use("/", pets);
+// const users = require("./routes/users");
+// app.use("/", users);
 
 module.exports = app;
