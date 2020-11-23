@@ -1,4 +1,6 @@
-<h1>Your added the Pets: </h1>
+
+{{#if pets}}
+<h1>Your Pets: </h1>
 
 {{#each pets}}
 
@@ -23,6 +25,12 @@ pestapp.com/:userId/pets --}}
 
 
 {{/each}}
+{{/if}}
 
-<a href="/user/{{userProfile._id}}">Your Profile</a>
-<a href="/allPets">See All Other Pets</a>
+{{#unless pets}}
+  <h1>It seems you haven't have any pets 🙉</h1>
+  <a href="/register-pets">🐈 Register your pets</a>
+{{/unless}}
+
+{{!-- <a href="/user/{{_id}}">Your Profile</a> --}}
+<a href="/allPets"> 🐕‍🦺 See all other pets</a>
