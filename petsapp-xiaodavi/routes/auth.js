@@ -1,69 +1,70 @@
-const express = require('express');
-const User = require('../models/User');
-const router  = express.Router();
-const bcrypt = require('bcrypt');
-const passport = require('passport');
+const express = require("express");
+const User = require("../models/User");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 //Signup //check naming user or users
-router.get('/signup', (req, res) =>{
-  console.log('blabla')
-  res.render('auth/signup')
-})
+router
+  .route("/signup")
+  .get((req, res) => {
+    console.log("blabla");
+    res.render("auth/signup");
+  })
+  .post((req, res, next) => {
+    const { username, password } = req.body;
+    if (password.length < 8) {
+      res.render("auth/signup", {
+        message: "Your password is too short.",
+      });
+      return;
+    }
+    if (username === "") {
+      res.render("auth/signup", { message: "Username field cannot be empty" });
+      return;
+    }
+    User.findOne({ username: username }).then((found) => {
+      if (found !== null) {
+        res.render("auth/signup", { message: "Username is already taken 🙊" });
+      } else {
+        // create a user with the username and password
+        const salt = bcrypt.genSaltSync();
+        const hash = bcrypt.hashSync(password, salt);
+
+        User.create({ username: username, password: hash })
+          .then((dbUser) => {
+            // login with passport
+            req.login(dbUser, (err) => {
+              if (err) {
+                next(err);
+              } else {
+                //req.session.user = dbUser;
+                res.redirect("/login");
+              }
+            });
+          })
+          .catch((err) => {
+            next(err);
+          });
+      }
+    });
+  });
 
 //login-GET
-router.get('/login', (req, res) => {
-  res.render('auth/login');
+router.get("/login", (req, res) => {
+  res.render("auth/login");
 });
 
 // log in post
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/register-pets", // need to be reviewed
     failureRedirect: "/login",
     passReqToCallback: true,
-  })
+  }),
+  (req, res) => {}
 );
-
-//signup post
-router.post('/signup', (req, res, next) => {
-  const { username, password } = req.body;
-  if (password.length < 8) {
-    res.render('auth/signup', {
-      message: 'Your password is too short.'
-    });
-    return;
-  }
-  if (username === '') {
-    res.render('auth/signup', { message: 'Username field cannot be empty' });
-    return;
-  }
-  User.findOne({ username: username }).then(found => {
-    if (found !== null) {
-      res.render('auth/signup', { message: 'Username is already taken 🙊' });
-    } else {
-      // create a user with the username and password 
-      const salt = bcrypt.genSaltSync();
-      const hash = bcrypt.hashSync(password, salt);
-
-      User.create({ username: username, password: hash })
-        .then(dbUser => {
-          // login with passport 
-          req.login(dbUser, err => {
-            if (err) {
-              next(err);
-            } else {
-              res.redirect('/');
-            }
-          })
-        })
-        .catch(err => {
-          next(err);
-        });
-    }
-  });
-});
-
 
 // Google-login
 
@@ -72,18 +73,17 @@ router.get(
   passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
+      "https://www.googleapis.com/auth/userinfo.email",
+    ],
   })
 );
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: "/register-pets",
-    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/", // here you would redirect to the login page using traditional login approach
   })
 );
-
 
 // router.get('/auth/logout', (req, res) => {
 //   req.session.destroy(err => {
@@ -94,8 +94,6 @@ router.get(
 //     }
 //   })
 // });
- 
-
 
 //   // .then(users => {
 //   //   console.log(users);
@@ -104,7 +102,6 @@ router.get(
 //   // .catch(err => {
 //   //   next(err);
 //   // })
-
 
 //      User.find()
 //       .then(users => {
@@ -128,15 +125,16 @@ router.get(
 //   // console.log(userId);
 //   console.log(req.params.userId); // if click "like", will get the userId from each user
 //   // User.findByIdAndUpdate({_id: userId}, {
-    
+
 //   // })
 // })
 //
 
 router.get("/logout", (req, res) => {
   req.logout();
+  req.session.destroy();
   res.redirect("/");
-  console.log('you logged out')
+  console.log("you logged out");
 });
 
 module.exports = router;

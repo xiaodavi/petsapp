@@ -1,17 +1,17 @@
 <form id="form" action="/signup" method="POST">
 
-  <label for="username">Username</label><br />
+  <label for="username">Username</label>
   <input type="text" name="username" />
 
-  <label for="password">Password</label><br />
+  <label for="password">Password</label>
   <input type="password" name="password" />
 
   {{#if message}}
-  <div class="error-message">{{message}}</div>
+  <div style="color:red" class="error-message">{{message}}</div>
   {{/if}}
 
   <button type="submit">Sign up 🦊</button>
 </form>
-
+<a href="/">Home</a>
 <a href="/auth/google">Log in with Google</a>
 <a href="/login">Log in</a>
