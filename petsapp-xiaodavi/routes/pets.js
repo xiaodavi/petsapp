@@ -84,63 +84,6 @@ router.get('/pets/:petsId', ensureAuthenticated, (req, res, next) => {
     res.render()
   })
 })
-/* GET users page */
-// router.get("/users", (req, res, next) => {
-//   User.find()
-//     .then((users) => {
-//       console.log(users);
-//       res.render("users/userList", { userList: users });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
-
-// router.get("/users/:userId", (req, res, next) => {
-//   User.findById(req.params.userId)
-//     .then((foundUser) => {
-//       console.log(foundUser);
-//       User.find()
-//         .then((users) => {
-//           res.render("users/userProfile", {
-//             userProfile: foundUser,
-//             userList: users,
-//           });
-//         })
-//         .catch((err) => console.log(err));
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
-
-// // router.get('/users/:userId/like', (req, res, next) => {
-// //   User.findById(req.params.userId)
-// //   .then(foundUser => {
-// //     console.log(foundUser);
-// //     res.redirect('/users', {foundUser})
-// //   })
-// // })
-
-// router.post("/users/:userId/like", (req, res, next) => {
-//   // console.log(userId);
-//   console.log(req.params.userId); // if click "like", will get the userId from each user
-//   // User.findByIdAndUpdate({_id: userId}, {
-
-//   // })
-// });
-
-//UPDATE /:id/edit
-
-// router.post('/:id/delete', (req, res, next) => { //
-//     Pet.findByIdAndRemove(req.params.id)
-//         .then(() => {
-//             res.redirect('register-pets');s
-//         })
-//         .catch(err => {
-//             next(err);
-//         })
-// });
 
 router.get('/pets/:id/edit', (req, res, next) => {
      Pet.findById(req.params.id)
@@ -153,22 +96,63 @@ router.get('/pets/:id/edit', (req, res, next) => {
         });
 });
 
-router.post('/pets/:id/edit', (req, res, next) =>{
-  console.log('hahaha')
- const {petsname, breed} = req.body;
- console.log(req.body)
- console.log("params below this");
- 
- console.log(req.params.id);
- //
- Pet.findByIdAndUpdate(req.params.id, {petsname, breed})
- .then(()=> {
-   console.log('pet')
-   res.redirect("/pets")
- }).catch(err => {
-   next(err);
- })
+router.post('/pets/:id/edit', ensureAuthenticated, uploader.single('petsimage'), (req, res, next) =>{
+  const { petsname, breed } = req.body;
+  const { id } = req.params;
+  // console.log(petsname)
+  let petsimage;
+  if (req.file) {
+    petsimage = req.file.path;
+  } else {
+    petsimage = req.body.existingImage;
+  }
+  Pet.findByIdAndUpdate(id, {
+    petsname,
+    breed,
+    petsimage,
+    owner: req.user._id
+  }, { new: true })
+  .then(()=> {
+    res.redirect("/pets")
+  }).catch(err => {
+    next(err);
+  })
 })
+
+
+
+// GET route for querying a specific movie from the database
+// and pre-filling the edit form
+ 
+// router.get('/movies/:id/edit', (req, res) => {
+//   const { id } = req.params;
+//   Movie.findById(id)
+//     .then(movieToEdit => res.render('movie-edit', movieToEdit))
+//     .catch(error => console.log(`Error while getting a single movie for edit: ${error}`));
+// });
+
+// // routes/movie.routes.js
+
+// // ... all imports and routes stay untouched
+
+// // POST route to save changes after updates in a specific movie
+
+// router.post('/movies/:id/edit', fileUploader.single('image'), (req, res) => {
+//   const { id } = req.params;
+//   const { title, description } = req.body;
+
+//   let imageUrl;
+//   if (req.file) {
+//     imageUrl = req.file.path;
+//   } else {
+//     imageUrl = req.body.existingImage;
+//   }
+
+//   Movie.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true })
+//     .then(() => res.redirect(`/movies`))
+//     .catch(error => console.log(`Error while updating a single movie: ${error}`));
+// });
+
 
 
 router.post('/pets/:id/delete', (req, res, next) => {
