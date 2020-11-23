@@ -18,7 +18,7 @@ function ensureAuthenticated (req, res, next) {
 
 // Register pets page
 
-router.get("/register-pets", (req, res, next) => {
+router.get("/register-pets", ensureAuthenticated, (req, res, next) => {
  // console.log(req.session);
   User.findById(req.session.passport.user)
     .then((user) => {
@@ -37,14 +37,16 @@ router.post("/register-pets", ensureAuthenticated, uploader.single('petsimage'),
   const { _id } = req.user;
   // console.log(petsname)
   const petsimage = req.file.path;
+  const publicId = req.file.filename;
+  console.log(req.file)
   // console.log(req.session.passport.user);
-  
   Pet.create({
     petsname,
     breed,
     petsimage,
     // owner: req.session.passport.user,
-    owner: _id
+    owner: _id,
+    publicId,
   })
   .then(dbPet => {
     return User.findByIdAndUpdate(req.user._id, {$push: {pets: dbPet._id }})
@@ -85,7 +87,7 @@ router.get('/pets/:petsId', ensureAuthenticated, (req, res, next) => {
   })
 })
 
-router.get('/pets/:id/edit', (req, res, next) => {
+router.get('/pets/:id/edit', ensureAuthenticated, (req, res, next) => {
      Pet.findById(req.params.id)
         .then(pet => {
           console.log(pet)
@@ -110,7 +112,7 @@ router.post('/pets/:id/edit', ensureAuthenticated, uploader.single('petsimage'),
     petsname,
     breed,
     petsimage,
-    owner: req.user._id
+    owner: req.user._id,
   }, { new: true })
   .then(()=> {
     res.redirect("/pets")
@@ -120,50 +122,30 @@ router.post('/pets/:id/edit', ensureAuthenticated, uploader.single('petsimage'),
 })
 
 
+// router.post('/pets/:id/delete', (req, res, next) => {
+//   const petsId = req.params.id
+//   Pet.findByIdAndRemove(petsId)
+//   .then(() => {
+//     res.redirect('/pets');
+//   })
+//   .catch(err => {
+//     next(err);
+//   })
+// })
 
-// GET route for querying a specific movie from the database
-// and pre-filling the edit form
- 
-// router.get('/movies/:id/edit', (req, res) => {
-//   const { id } = req.params;
-//   Movie.findById(id)
-//     .then(movieToEdit => res.render('movie-edit', movieToEdit))
-//     .catch(error => console.log(`Error while getting a single movie for edit: ${error}`));
-// });
+router.post('/pets/:id/delete', ensureAuthenticated, (req, res, next) => {
+  Pet.findByIdAndDelete(req.params.id)
+    .then(pet => {
+      console.log(pet)
+      if (pet.petsimage) {
+        cloudinary.uploader.destroy(pet.publicId);
+      }
+      res.redirect('/pets');
+    })
+    .catch(err => {
+      next(err);
+    })
+});
 
-// // routes/movie.routes.js
-
-// // ... all imports and routes stay untouched
-
-// // POST route to save changes after updates in a specific movie
-
-// router.post('/movies/:id/edit', fileUploader.single('image'), (req, res) => {
-//   const { id } = req.params;
-//   const { title, description } = req.body;
-
-//   let imageUrl;
-//   if (req.file) {
-//     imageUrl = req.file.path;
-//   } else {
-//     imageUrl = req.body.existingImage;
-//   }
-
-//   Movie.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true })
-//     .then(() => res.redirect(`/movies`))
-//     .catch(error => console.log(`Error while updating a single movie: ${error}`));
-// });
-
-
-
-router.post('/pets/:id/delete', (req, res, next) => {
-  const petsId = req.params.id
-  Pet.findByIdAndRemove(petsId)
-  .then(() => {
-    res.redirect('/pets');
-  })
-  .catch(err => {
-    next(err);
-  })
-})
 
 module.exports = router;
