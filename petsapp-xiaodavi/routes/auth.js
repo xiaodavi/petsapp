@@ -39,7 +39,7 @@ router
                 next(err);
               } else {
                 //req.session.user = dbUser;
-                res.redirect("/register-pets");
+                res.redirect("/login");
               }
             });
           })
@@ -59,7 +59,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/register-pets",
+    successRedirect: "/userProfile", // need to be reviewed
     failureRedirect: "/login",
     passReqToCallback: true,
   }),

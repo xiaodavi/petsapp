@@ -1,0 +1,28 @@
+<h1>Your Profile</h1>
+
+{{#with userProfile}}
+  <p>Your username: {{username}}</p>
+  <hr>
+  {{#if userProfile.pets}}
+    <h3>You own Pets: </h3>
+
+      {{#each userProfile.pets}}
+
+      <p>Pet's Name: {{this.petsname}}</p>
+      <p>Breed: {{this.breed}}</p>
+      <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
+
+      {{!-- <button><a href="/users/{{_id}}/edit">Edit</a></button>
+      <button><a href="/users/{{_id}}/delete">Delete</a></button> --}}
+      <a href="/pets">See Your Pets Details</a>
+
+      {{/each}}
+  {{/if}}
+
+  {{#unless username.pets}}
+      <a href="/register-pets"> Go to Register Your Pets</a>
+  {{/unless}}
+
+{{/with}}
+
+<a href="/allPets">See All Other Pets</a>

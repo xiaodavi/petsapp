@@ -49,20 +49,31 @@ router.post("/register-pets", ensureAuthenticated, uploader.single('petsimage'),
   .then(dbPet => {
     return User.findByIdAndUpdate(req.user._id, {$push: {pets: dbPet._id }})
   })
-  .then(() => res.redirect('/pets'))
+  .then(() => res.redirect('pets'))
   .catch(err => {
     next(err);
   })
 })
 
-// list all pets of the owner
+// list all pets of the owner 
 router.get('/pets', ensureAuthenticated, (req, res, next) => {
+  // const {userId} = req.params.id
   const { _id } =req.user;
   Pet.find({owner: _id})
+  .populate('owner')
   .then(myPets => {
     res.render('users/pets-details', {pets: myPets});
   })
   .catch(err => next(err));
+})
+
+router.get('/allPets', ensureAuthenticated, (req, res, next) => {
+  Pet.find()
+  .populate('owner')
+  .then(allPets => {
+    res.render('users/allPets', {allPets})
+  })
+  .catch(err => next(err))
 })
 
 /* GET users page */
@@ -113,15 +124,44 @@ router.get('/pets', ensureAuthenticated, (req, res, next) => {
 
 //UPDATE /:id/edit
 
-//DELETE
-// router.delete("/edit/:id", (req,res) =>{
-//   const {id} = req.params;
-//   Pet.findByIdAndRemove(id)
-//   .then(() => {
-//     res.redirect("register-pets")
-//   }).catch(err =>{ 
-//     next()
-//   })
+// router.post('/:id/delete', (req, res, next) => { //
+//     Pet.findByIdAndRemove(req.params.id)
+//         .then(() => {
+//             res.redirect('register-pets');s
+//         })
+//         .catch(err => {
+//             next(err);
+//         })
+// });
 
+router.get('/users/:id/edit', (req, res, next) => {
+    Pet.findByIdAndUpdate(req.params.id)
+        .then(pet => {
+            res.render('pets/edit', { pet });
+        })
+        .catch(err => {
+            next(err);
+        });
+});
+
+router.post('/users/:id', (req, res, next) =>{
+ const {petsname, breed, petsimage} = req.body;
+ console.log(req.params.id)
+ Pet.findByIdAndUpdate(req.params.id, {petsname, breed, petsimage})
+ .then(()=> {
+   res.redirect("users/pets-details")
+ })
+})
+
+
+router.post('/users/:id/delete', (req, res, next) => {
+  Pet.findByIdAndRemove(req.params.id)
+  .then(() => {
+    res.redirect('users/:id');
+  })
+  .catch(err => {
+    next(err);
+  })
+})
 
 module.exports = router;
