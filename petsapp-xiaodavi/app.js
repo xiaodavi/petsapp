@@ -86,7 +86,7 @@ passport.deserializeUser((id, done) => {
     .then((dbUser) => {
       done(null, dbUser);
       hbs.registerHelper("isid", function (value) {
-        console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
+        // console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
         return JSON.stringify(value) !== JSON.stringify(dbUser._id);
       });
     })

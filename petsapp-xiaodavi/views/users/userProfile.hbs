@@ -1,37 +1,38 @@
 <a href="/">Home</a>
 <a href="user-profile/edit">Edit Profile</a>
+<a href="/register-pets"> Register Pets</a>
+<a href="/allPets">See All Other Pets</a>
+<a href="/pets">Pets Details</a>
 
 <h1>Your Profile</h1>
 
 {{#with user}}
+
 <p>Your username: {{username}}</p>
 <p>Email: {{email}}</p>
 <img style='width:300px; height: 300px; object-fit:cover' src="{{userImg}}" alt="{{userImg}}">
 
-<hr>
-{{#if user.pets}}
-<h3>You own Pets: </h3>
+{{/with}}
+
+{{!-- <hr> --}}
+
+
+{{!-- <h3>You own Pets: </h3>
 
 {{#each user.pets}}
 
-<p>Pet's Name: {{this.petsname}}</p>
-<p>Breed: {{this.breed}}</p>
+<p>Pet's Name: {{petsname}}</p>
+<p>Breed: {{breed}}</p>
 
-<img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
+<img style='width:300px; height: 300px; object-fit:cover' src="{{petsimage}}" alt="{{petsname}}"> --}}
 
 
 {{!-- <button><a href="/users/{{_id}}/edit">Edit</a></button>
       <button><a href="/users/{{_id}}/delete">Delete</a></button> --}}
-<a href="/pets">See Your Pets Details</a>
 
-{{/each}}
-{{/if}}
 
-{{#unless user.pets}}
-<p>You don't have any pets yet.</p>
-<a href="/register-pets"> Go to Register Your Pets</a>
-{{/unless}}
 
-{{/with}}
+{{!-- {{/each}} --}}
 
-<a href="/allPets">See All Other Pets</a>
+
+
