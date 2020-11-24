@@ -16,13 +16,26 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 
-router.get('/users/:id', (req, res, next) => {
-  const userId = req.params.id;
-  User.find(userId).populate('pets')
-  .then(user => {
-    res.render('users/userProfile', {userProfile: user})
+// profile ???? don't work
+router.get('/user', ensureAuthenticated, (req, res, next) => {
+  User.findById(req.session.passport.user)
+  .then((user) => {
+    // console.log(user);
+    res.render("users/userProfile", { user: user });
   })
-  .catch(err => {
-    next(err)
-  })
+  .catch((err) => {
+    next(err);
+  });
 })
+
+// router.get("/register-pets", ensureAuthenticated, (req, res, next) => {
+//   // console.log(req.session);
+//    User.findById(req.session.passport.user)
+//      .then((user) => {
+//        // console.log(user);
+//        res.render("users/register-pets", { user: user });
+//      })
+//      .catch((err) => {
+//        next(err);
+//      });
+//  });
