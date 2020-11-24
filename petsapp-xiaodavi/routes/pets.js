@@ -168,31 +168,31 @@ router.post(
 //     .catch(error => console.log(`Error while updating a single movie: ${error}`));
 // });
 
-router.post("/pets/:id/delete", (req, res, next) => {
-  const petsId = req.params.id;
-  Pet.findByIdAndRemove(petsId)
-    .then(() => {
-      res.redirect("/pets");
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
-//xiaomei delete route check
-// router.post("/pets/:id/delete", ensureAuthenticated, (req, res, next) => {
-//   Pet.findByIdAndDelete(req.params.id)
-//     .then((pet) => {
-//       console.log(pet);
-//       if (pet.petsimage) {
-//         cloudinary.uploader.destroy(pet.publicId);
-//       }
+// router.post("/pets/:id/delete", (req, res, next) => {
+//   const petsId = req.params.id;
+//   Pet.findByIdAndRemove(petsId)
+//     .then(() => {
 //       res.redirect("/pets");
 //     })
 //     .catch((err) => {
 //       next(err);
 //     });
 // });
+
+//xiaomei delete route check
+router.post("/pets/:id/delete", ensureAuthenticated, (req, res, next) => {
+  Pet.findByIdAndDelete(req.params.id)
+    .then((pet) => {
+      console.log(pet);
+      if (pet.petsimage) {
+        cloudinary.uploader.destroy(pet.publicId);
+      }
+      res.redirect("/pets");
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 //when user click on like btn we push their id into the pet's owner array
 router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
