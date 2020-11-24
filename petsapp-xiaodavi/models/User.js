@@ -5,6 +5,8 @@ const userSchema = new Schema (
   {
     username: String,
     password: String,
+    userImg: String,
+    email: String,
     pets: [{
       type: Schema.Types.ObjectId,
       ref: 'Pet'

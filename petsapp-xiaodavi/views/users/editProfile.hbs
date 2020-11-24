@@ -1,0 +1,20 @@
+<h1>Edit Your Profile</h1>
+{{#with user}}
+<form action="/user-profile/edit" method="POST" enctype="multipart/form-data">
+  <label for="username">Username: </label>
+  <input type="text" name="username" id="username" value="{{username}}">
+
+  <label for="email">Email: </label>
+  <input type="email" name="email" id="email" value="{{email}}">
+
+  <label for="password">Password: </label>
+  <input type="password" name="password" id="password" value="{{password}}">
+
+  <label for="userImg">Upload an Image </label>
+  <input type="file" name="userImg" id="userImg">
+
+  <button type="submit">Edit the Profile</button>
+
+</form>
+{{/with}}
+<a href="/">Homepage</a>
