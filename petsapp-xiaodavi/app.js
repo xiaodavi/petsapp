@@ -10,11 +10,11 @@ const logger = require("morgan");
 const path = require("path");
 
 mongoose
-  .connect("mongodb://localhost/pets-app", { 
+  .connect("mongodb://localhost/pets-app", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then((x) => {
     console.log(
@@ -85,6 +85,10 @@ passport.deserializeUser((id, done) => {
   User.findById(id)
     .then((dbUser) => {
       done(null, dbUser);
+      hbs.registerHelper("isid", function (value) {
+        console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
+        return JSON.stringify(value) !== JSON.stringify(dbUser._id);
+      });
     })
     .catch((err) => {
       done(err);

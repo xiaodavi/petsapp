@@ -1,36 +1,32 @@
+<a href="/user/{{userProfile._id}}">Your Profile</a>
+<a href="/allPets">See All Other Pets</a>
 
-{{#if pets}}
-<h1>Your Pets: </h1>
+<h1>Your added the Pets: </h1>
 
-{{#each pets}}
+<div style='display:flex; flex-wrap: wrap'>
+    {{#each pets}}
+    <div style='padding:5px; margin:5px'>
+        <p>Pet's Name: {{this.petsname}}</p>
+        <p>Breed: {{this.breed}}</p>
+        <p>Owner: {{this.owner.username}}</p>
+        <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
 
-<p>Pet's Name: {{this.petsname}}</p>
-<p>Breed: {{this.breed}}</p>
-<p>Owner: {{this.owner.username}}</p>
-<img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
+        {{!-- here add links for edit or delete a pet --}}
+        <div style='display:flex'>
+            <a href="/pets/{{this._id}}/edit"><button>Edit</button></a>
 
-{{!-- here add links for edit or delete a pet --}}
-<a href="/pets/{{this._id}}/edit">Edit</a>
+            <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
 
-<form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
-<button type="submit">Delete</button>
-</form>
+    </div>
 
-
-
-{{!-- pestapp.com/:userId/registerpet
-pestapp.com/:userId/petsdatail
-pestapp.com/:userId/edit,delete
-pestapp.com/:userId/pets --}}
+    {{!-- pestapp.com/:userId/registerpet
+    pestapp.com/:userId/petsdatail
+    pestapp.com/:userId/edit,delete
+    pestapp.com/:userId/pets --}}
 
 
-{{/each}}
-{{/if}}
-
-{{#unless pets}}
-  <h1>It seems you haven't have any pets 🙉</h1>
-  <a href="/register-pets">🐈 Register your pets</a>
-{{/unless}}
-
-{{!-- <a href="/user/{{_id}}">Your Profile</a> --}}
-<a href="/allPets"> 🐕‍🦺 See all other pets</a>
+    {{/each}}
+</div>
