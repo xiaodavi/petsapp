@@ -161,7 +161,9 @@ const auth = require("./routes/auth");
 app.use("/", auth);
 const pets = require("./routes/pets");
 app.use("/", pets);
-// const users = require("./routes/users");
-// app.use("/", users);
+const users = require("./routes/users");
+app.use("/", users);
+const match = require("./routes/match");
+app.use("/", match)
 
 module.exports = app;
