@@ -10,11 +10,11 @@ const logger = require("morgan");
 const path = require("path");
 
 mongoose
-  .connect("mongodb://localhost/pets-app", { 
+  .connect("mongodb://localhost/pets-app", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then((x) => {
     console.log(
@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "PetsApp";
 
 // passport configuration
 const session = require("express-session");
@@ -85,6 +85,10 @@ passport.deserializeUser((id, done) => {
   User.findById(id)
     .then((dbUser) => {
       done(null, dbUser);
+      hbs.registerHelper("isid", function (value) {
+        // console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
+        return JSON.stringify(value) !== JSON.stringify(dbUser._id);
+      });
     })
     .catch((err) => {
       done(err);
@@ -157,7 +161,9 @@ const auth = require("./routes/auth");
 app.use("/", auth);
 const pets = require("./routes/pets");
 app.use("/", pets);
-// const users = require("./routes/users");
-// app.use("/", users);
+const users = require("./routes/users");
+app.use("/", users);
+const match = require("./routes/match");
+app.use("/", match)
 
 module.exports = app;

@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'pets-app',
     allowed_formats: ['jpg, png'],
-    // public_id: (req, file) => 'computed-filename-using-request',
+    public_id: (req, file) => 'computed-filename-using-request',
   },
 });
 

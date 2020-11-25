@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const {Schema, model} = mongoose;
 
-const petSchema = new Schema (
+const cafeSchema = new Schema (
   {
-    petsname: String,
-    breed: String,
-    petsimage: String,
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    publicId: String
+    cafename: String,
+    phone: Number,
+    adress: String,
+    city: String,
+    country: String,
+    postalCode: Number,
+    coordinates:[]
   }, 
-
   {
     timestamps: {
       createdAt: "created_at",

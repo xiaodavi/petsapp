@@ -16,13 +16,54 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 
-router.get('/users/:id', (req, res, next) => {
-  const userId = req.params.id;
-  User.find(userId).populate('pets')
-  .then(user => {
-    res.render('users/userProfile', {userProfile: user})
+// profile
+router.get('/user-profile', ensureAuthenticated, (req, res, next) => {
+  const userId = req.session.passport.user
+  User.findById(userId)
+  .then((user) => {
+    // console.log(user);
+    res.render("users/userProfile", { user: user });
   })
-  .catch(err => {
-    next(err)
-  })
+  .catch((err) => {
+    next(err);
+  });
 })
+
+// edit profile form
+router.get('/user-profile/edit', ensureAuthenticated, (req, res, next) => {
+  User.findById(req.session.passport.user)
+  .then((user) => {
+    res.render("users/editProfile", {user: user})
+  })
+  .catch((err) => {
+    next(err);
+  });
+})
+
+// edit profile post
+router.post('/user-profile/edit', ensureAuthenticated, uploader.single("userImg"), (req, res, next) => {
+  const {username, email, password} = req.body;
+  let userImg;
+  if(req.file) {
+    userImg = req.file.path;
+  } else {
+    userImg = req. body.existingImage;
+  }
+  User.findByIdAndUpdate(req.session.passport.user, {
+    username,
+    email,
+    password,
+    userImg,
+  },
+  {new: true}
+)
+  .then(() => {
+    res.redirect("/user-profile");
+  })
+  .catch((err) => {
+    next(err);
+  });
+});
+
+
+module.exports = router;
