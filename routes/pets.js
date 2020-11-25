@@ -67,7 +67,7 @@ router.post(
 
 // list all pets of the owner
 router.get("/pets", ensureAuthenticated, (req, res, next) => {
-  // const userId = req.params.id
+  // const {userId} = req.params.id
   const { _id } = req.user;
   Pet.find({ owner: _id })
     .populate("owner")
