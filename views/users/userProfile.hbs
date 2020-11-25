@@ -1,0 +1,38 @@
+<a href="/">Home</a>
+<a href="user-profile/edit">Edit Profile</a>
+<a href="/register-pets"> Register Pets</a>
+<a href="/allPets">See All Other Pets</a>
+<a href="/pets">Pets Details</a>
+
+<h1>Your Profile</h1>
+
+{{#with user}}
+
+<p>Your username: {{username}}</p>
+<p>Email: {{email}}</p>
+<img style='width:300px; height: 300px; object-fit:cover' src="{{userImg}}" alt="{{userImg}}">
+
+{{/with}}
+
+{{!-- <hr> --}}
+
+
+{{!-- <h3>You own Pets: </h3>
+
+{{#each user.pets}}
+
+<p>Pet's Name: {{petsname}}</p>
+<p>Breed: {{breed}}</p>
+
+<img style='width:300px; height: 300px; object-fit:cover' src="{{petsimage}}" alt="{{petsname}}"> --}}
+
+
+{{!-- <button><a href="/users/{{_id}}/edit">Edit</a></button>
+      <button><a href="/users/{{_id}}/delete">Delete</a></button> --}}
+
+
+
+{{!-- {{/each}} --}}
+
+
+
