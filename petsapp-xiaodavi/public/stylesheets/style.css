@@ -133,4 +133,38 @@ a {
 .mapboxgl-popup {
   padding-bottom: 50px; }
 
+.messanger,
+.messageBox {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid black; }
+
+.messageBox {
+  height: 100px; }
+
+.sender {
+  text-align: right;
+  color: green; }
+
+.receiver {
+  text-align: left;
+  color: red; }
+
+.login-home {
+  background-image: url(); }
+
+.signup-home {
+  width: auto;
+  height: 750px;
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.signup-home a {
+  color: black; }
+
 /*# sourceMappingURL=style.css.map */

@@ -165,5 +165,7 @@ const users = require("./routes/users");
 app.use("/", users);
 const match = require("./routes/match");
 app.use("/", match)
+const message = require("./routes/message");
+app.use("/", message);
 
 module.exports = app;
