@@ -1,0 +1,65 @@
+<h1>Fake Chat</h1>
+
+<div class='messanger'>
+    <div class='messageBox'>
+    </div>
+    <textarea id='message' name="comment " placeholder="Say something..."></textarea><br>
+    <button id='send' type=>Send</button>
+
+</div>
+
+<script>
+    let receiver = "5fba588594519f12f588754a";
+    let sender = "5fbc1cc032860d1face66d4c"
+    let messageBox = document.querySelector('.messageBox')
+
+    function renderMessages() {
+        messageBox.innerHTML = ''
+        fetch("http://localhost:3000/message/history", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ receiver, sender })
+        })
+            .then(data => data.json())
+            .then(messages => {
+                messages.forEach(message => {
+                    messageBox.innerHTML += `
+                    <div class='${message.sender == sender ? 'sender' : 'receiver'}'>
+                        <div >${message.body}</div>
+                    </div>
+                `
+                })
+
+            })
+    }
+
+    renderMessages()
+
+    setInterval(() => {
+        renderMessages()
+    }, 1000)
+
+
+    document.querySelector('#send').onclick = function () {
+        let body = document.querySelector('#message').value
+        fetch("http://localhost:3000/message/add", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ receiver, sender, body })
+        })
+            .then(data => data.json())
+            .then(message => {
+                messageBox.innerHTML += `
+                <div class='${message.sender == sender ? 'sender' : 'receiver'}'>
+                    <div >${message.body}</div>
+                </div>
+            `
+            })
+    }
+
+
+</script>

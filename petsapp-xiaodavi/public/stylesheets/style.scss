@@ -185,3 +185,24 @@ a {
 .mapboxgl-popup {
   padding-bottom: 50px;
 }
+
+// message
+.messanger,
+.messageBox {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid black;
+}
+
+.messageBox {
+  height: 100px;
+}
+
+.sender {
+  text-align: right;
+  color: green;
+}
+.receiver {
+  text-align: left;
+  color: red;
+}
