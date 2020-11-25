@@ -10,7 +10,7 @@
 
 <script>
     let receiver = "5fba588594519f12f588754a";
-    let sender = "5fbc1cc032860d1face66d4c"
+    let sender = req.session.passport.user
     let messageBox = document.querySelector('.messageBox')
 
     function renderMessages() {
@@ -24,9 +24,11 @@
         })
             .then(data => data.json())
             .then(messages => {
+                console.log(messages)
                 messages.forEach(message => {
                     messageBox.innerHTML += `
                     <div class='${message.sender == sender ? 'sender' : 'receiver'}'>
+                      {{!-- if statement --}}
                         <div >${message.body}</div>
                     </div>
                 `
@@ -37,9 +39,7 @@
 
     renderMessages()
 
-    setInterval(() => {
-        renderMessages()
-    }, 1000)
+
 
 
     document.querySelector('#send').onclick = function () {

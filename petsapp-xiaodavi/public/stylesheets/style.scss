@@ -115,7 +115,9 @@ a {
   text-decoration: none;
 }
 
-.listings .item:last-child { border-bottom: none; }
+.listings .item:last-child {
+  border-bottom: none;
+}
 
 .listings .item .title {
   display: block;
@@ -123,10 +125,14 @@ a {
   font-weight: 700;
 }
 
-.listings .item .title small { font-weight: 400; }
+.listings .item .title small {
+  font-weight: 400;
+}
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #8cc63f; }
+.listings .item .title:hover {
+  color: #8cc63f;
+}
 
 .listings .item.active {
   background-color: #f8f8f8;
@@ -148,7 +154,9 @@ a {
   border-radius: 0;
 }
 
-.clearfix { display: block; }
+.clearfix {
+  display: block;
+}
 
 .clearfix::after {
   content: '.';
@@ -202,7 +210,30 @@ a {
   text-align: right;
   color: green;
 }
+
 .receiver {
   text-align: left;
   color: red;
+}
+
+// login-home page
+
+.login-home {
+  background-image: url();
+}
+
+.signup-home {
+  width: auto;
+  height: 750px;
+  background-image: url("/images/background/IMG_6238\ copy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-home a {
+  color: black;
 }

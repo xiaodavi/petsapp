@@ -31,6 +31,8 @@ router.post("/message/history", ensureAuthenticated, (req, res, next) => {
     ],
   })
     .then((messages) => {
+      console.log(messages)
+      console.log(req.session.passport.user)
       // console.log(user);
       res.json(messages);
     })
