@@ -8,10 +8,10 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
-const flash = require("connect-flash")
+const flash = require("connect-flash");
 
 mongoose
-  .connect("mongodb://localhost/pets-app", {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/pets-app", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -101,26 +101,28 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'username',
-    passwordField: 'password'
-  },
-  (username, password, done) => {
-    User.findOne({ username: username })
-      .then((found) => {
-        if (found === null) {
-          return done(null, false, { message: "Wrong credentials" });
-        } 
-        if (!bcrypt.compareSync(password, found.password)) {
-          return done(null, false, { message: "Wrong credentials" });
-        }
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password",
+    },
+    (username, password, done) => {
+      User.findOne({ username: username })
+        .then((found) => {
+          if (found === null) {
+            return done(null, false, { message: "Wrong credentials" });
+          }
+          if (!bcrypt.compareSync(password, found.password)) {
+            return done(null, false, { message: "Wrong credentials" });
+          }
           done(null, found);
-      })
-      .catch((err) => {
-        done(err, false);
-      });
-  })
+        })
+        .catch((err) => {
+          done(err, false);
+        });
+    }
+  )
 );
 
 //Google strategy HERE
@@ -168,7 +170,7 @@ app.use("/", pets);
 const users = require("./routes/users");
 app.use("/", users);
 const match = require("./routes/match");
-app.use("/", match)
+app.use("/", match);
 const message = require("./routes/message");
 app.use("/", message);
 
