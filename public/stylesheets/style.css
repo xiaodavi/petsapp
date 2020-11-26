@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Trocchi&display=swap");
 .map-container {
   color: #404040;
   font: 400 15px/22px "Source Sans Pro", "Helvetica Neue", Sans-serif;
@@ -330,7 +331,8 @@ textarea {
   align-items: center; }
 
 .login-form a {
-  color: black; }
+  color: black;
+  font-family: 'Trocchi', serif; }
 
 .editUserProfile-page {
   width: auto;
@@ -342,11 +344,13 @@ textarea {
   align-items: center; }
 
 .editUserProfile-page h1 {
-  padding: 20px; }
+  padding: 20px;
+  font-family: 'Trocchi', serif; }
 
 .pets-details-page h1 {
   text-align: center;
-  padding: 20px; }
+  padding: 20px;
+  font-family: 'Trocchi', serif; }
 
 .register-pets-page {
   width: auto;
@@ -358,6 +362,27 @@ textarea {
   align-items: center; }
 
 .register-pets-page h1 {
-  padding: 20px; }
+  padding: 20px;
+  font-family: 'Trocchi', serif; }
+
+.allPets-page {
+  background-image: url("/images/background/IMG_6238 copy.jpg"); }
+
+.allPets-page .card {
+  background-color: blanchedalmond;
+  border-radius: 2.25rem; }
+
+.userProfile-page {
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  background-size: cover;
+  position: relative; }
+
+.userProfile-page .bg-white {
+  padding-top: 20px; }
+
+.pets-details-page {
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  background-size: cover;
+  position: relative; }
 
 /*# sourceMappingURL=style.css.map */

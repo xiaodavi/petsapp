@@ -1,7 +1,4 @@
-<div class="allPets-page">
-
-    {{!-- nav bar --}}
-
+{{!-- nav bar --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
         <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
                 style="height: 45px; width:45px"></a>
@@ -25,6 +22,7 @@
         <a href="/logout">Log Out</a>
     </nav>
 
+<div class="allPets-page">
     {{!-- pets list --}}
 
     <div class="row row-cols-1 row-cols-md-4" style="padding-left: 50px; padding-right: 30px">
@@ -42,9 +40,8 @@
                         {{#if (isid this.owner._id)}}
                         <form action='/pets/like' method='POST'>
                             <input type='hidden' value="{{this.owner._id}}" name='id' />
-                            <button class="btn btn-primary btn-lg border-0 active"
-                                style="background-color:rgb(188, 147, 212); color:darkcyan" role="button"
-                                aria-pressed="true">Like💚</button>
+                            <button class="btn btn-info btn-lg border-0 active" role="button"
+                                aria-pressed="true">Like 💛 </button>
                         </form>
                         {{/if}}
                     </div>

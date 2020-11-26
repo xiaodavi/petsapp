@@ -42,7 +42,7 @@
 
   function renderMessages() {
     messageBox.innerHTML = ''
-    fetch("http://localhost:3000/message/history", {
+    fetch("/message/history", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -72,7 +72,7 @@
   document.querySelector('#send').onclick = function () {
     let body = document.querySelector('#message')
 
-    fetch("http://localhost:3000/message/add", {
+    fetch("/message/add", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
