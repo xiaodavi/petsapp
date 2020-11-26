@@ -16,10 +16,12 @@ function ensureAuthenticated (req, res, next) {
   }
 }
 
+
 // profile
 router.get('/user-profile', ensureAuthenticated, (req, res, next) => {
   const userId = req.session.passport.user
   User.findById(userId)
+  .populate('pets')
   .then((user) => {
     // console.log(user);
     res.render("users/userProfile", { user: user });

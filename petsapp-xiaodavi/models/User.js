@@ -7,20 +7,20 @@ const userSchema = new Schema (
     password: String,
     userImg: String,
     email: String,
+    address: {
+      city: String,
+      state: String,
+      zip: Number
+    },
     pets: [{
       type: Schema.Types.ObjectId,
       ref: 'Pet'
     }],
-
     likedPeople: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
     }],
     googleID: String,
-    // role: {
-    //   type: String,
-    //   enum: ['admin', 'user']
-    // }
   }, 
   
   {

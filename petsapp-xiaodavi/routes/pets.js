@@ -31,12 +31,8 @@ router.get("/register-pets", ensureAuthenticated, (req, res, next) => {
     });
 });
 
-//
-router.post(
-  "/register-pets",
-  ensureAuthenticated,
-  uploader.single("petsimage"),
-  (req, res, next) => {
+// Register pets page
+router.post("/register-pets",ensureAuthenticated, uploader.single("petsimage"), (req, res, next) => {
     // console.log('hahaah')
     const { petsname, breed } = req.body;
     const { _id } = req.user;
@@ -85,6 +81,8 @@ router.get("/allPets", ensureAuthenticated, (req, res, next) => {
     })
     .catch((err) => next(err));
 });
+
+// ??
 
 router.get("/pets/:petsId", ensureAuthenticated, (req, res, next) => {
   const petsId = req.params.petsId;
@@ -194,6 +192,10 @@ router.post("/pets/:id/delete", ensureAuthenticated, (req, res, next) => {
     });
 });
 
+router.get("/pets/like", (req, res, next) => {
+  res.redirect("/pets/like", {"message": req.flash("You liked this pet 💛")})
+})
+
 //when user click on like btn we push their id into the pet's owner array
 // into likedPeople array?
 router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
@@ -218,7 +220,7 @@ router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
         if(likedPersonfromDB.likedPeople.includes(loggedInUserId)){
           console.log(likedPersonfromDB)
           // match!
-          res.render('match/matchPage', {likedPersonfromDB})
+          res.render('match/matchPage', {likedPersonfromDB, loggedInUserId})
         } else {
           // don't match
           console.log(likedPersonfromDB)

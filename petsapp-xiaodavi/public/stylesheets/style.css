@@ -1,10 +1,3 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
-
-a {
-  color: darkgreen; }
-
 .map-container {
   color: #404040;
   font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
@@ -166,5 +159,57 @@ a {
 
 .signup-home a {
   color: black; }
+
+.signup-form {
+  width: auto;
+  height: 750px;
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.signup-form a {
+  color: black; }
+
+.login-form {
+  width: auto;
+  height: 750px;
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.login-form a {
+  color: black; }
+
+.editUserProfile-page {
+  width: auto;
+  height: 680px;
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.editUserProfile-page h1 {
+  padding: 20px; }
+
+.pets-details-page h1 {
+  text-align: center;
+  padding: 20px; }
+
+.register-pets-page {
+  width: auto;
+  height: 680px;
+  background-image: url("/images/background/IMG_6238 copy.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.register-pets-page h1 {
+  padding: 20px; }
 
 /*# sourceMappingURL=style.css.map */

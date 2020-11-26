@@ -8,6 +8,7 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const flash = require("connect-flash")
 
 mongoose
   .connect("mongodb://localhost/pets-app", {
@@ -60,27 +61,32 @@ app.locals.title = "PetsApp";
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
+const bcrypt = require("bcrypt");
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: true,
+    resave: true,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 24 * 60 * 60 * 1000,
     }),
   })
 );
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 const User = require("./models/User");
-const bcrypt = require("bcrypt");
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
-
 passport.deserializeUser((id, done) => {
   User.findById(id)
     .then((dbUser) => {
@@ -95,17 +101,21 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-passport.use(
-  new LocalStrategy((username, password, done) => {
+passport.use(new LocalStrategy(
+  {
+    usernameField: 'username',
+    passwordField: 'password'
+  },
+  (username, password, done) => {
     User.findOne({ username: username })
       .then((found) => {
         if (found === null) {
-          done(null, false, { message: "Wrong credentials" });
-        } else if (!bcrypt.compareSync(password, found.password)) {
-          done(null, false, { message: "Wrong credentials" });
-        } else {
-          done(null, found);
+          return done(null, false, { message: "Wrong credentials" });
+        } 
+        if (!bcrypt.compareSync(password, found.password)) {
+          return done(null, false, { message: "Wrong credentials" });
         }
+          done(null, found);
       })
       .catch((err) => {
         done(err, false);
@@ -146,14 +156,8 @@ passport.use(
   )
 );
 
-//require google strategy
-//instantiate the new Google strategy//
-//find a user with profile.id as Google or create one
-//if user already exists do that
-//else // no user with that github id then create
-
-app.use(passport.initialize());
-app.use(passport.session());
+// for flash messages
+app.use(flash());
 
 const index = require("./routes/index");
 app.use("/", index);
