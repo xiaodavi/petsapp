@@ -55,7 +55,6 @@
         messages.forEach(message => {
           messageBox.innerHTML += `
               <div class='${message.sender == sender ? 'sender' : 'receiver'}'>
-                {{!-- if statement --}}
                   <div >${message.body}</div>
               </div>
           `
@@ -63,7 +62,6 @@
 
       })
   }
-
 
 
 
