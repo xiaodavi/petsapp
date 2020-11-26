@@ -6,15 +6,18 @@
   </h1>
 
   <div class="login-buttons">
-    <button type="button" class="btn btn-info btn-lg btn-block" style="width: 300px; color:black"><a
-        href="/signup">Signup</a></button>
-    <button type="button" class="btn btn-success btn-lg btn-block" style="width: 300px; color:black"><a
-        href="/login">Login</a></button>
-    <button type="button" class="btn btn-warning btn-lg btn-block" style="width: 300px"><a href=" /auth/google">Login
-        with
-        Google</a></button>
+    <form action="/signup">
+      <button type="submit" class="btn btn-info btn-lg btn-block" style="width: 300px; color:black">Signup</button>
+    </form>
+    <form action="/login">
+      <button type="submit" class="btn btn-success btn-lg btn-block" style="width: 300px; color:black">Login</button>
+    </form>
+    <form action="/auth/google">
+      <button type="submit" class="btn btn-warning btn-lg btn-block" style="width: 300px">Login
+          with
+          Google</button>
+    </form>
   </div>
-
 </div>
 
 {{/unless}}
@@ -25,7 +28,7 @@
 <div class="login-home">
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
     <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
-        style="height: 45px; width:45px"></a>
+        style="height: 50px; width:50px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -43,7 +46,11 @@
         </li>
       </ul>
     </div>
-    <a href="/logout">Log Out</a>
+
+     <form action="/logout">
+      <button type="submit" class="btn btn-dark">Log out</button>
+    </form>
+    
   </nav>
   
   <div class="section-2">
