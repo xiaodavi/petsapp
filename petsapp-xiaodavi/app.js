@@ -11,7 +11,7 @@ const path = require("path");
 const flash = require("connect-flash");
 
 mongoose
-  .connect("mongodb://localhost/pets-app", {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/pets-app", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
