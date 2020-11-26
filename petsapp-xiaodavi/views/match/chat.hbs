@@ -10,7 +10,7 @@
 
 <script>
     let receiver = "5fba588594519f12f588754a";
-    let sender = req.session.passport.user
+    let sender = req.session.passport.user._id
     let messageBox = document.querySelector('.messageBox')
 
     function renderMessages() {

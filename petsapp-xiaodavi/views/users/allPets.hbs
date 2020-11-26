@@ -1,56 +1,26 @@
-{{!-- <div class="allPets-page">
-    <h1>Look around 🐈 </h1>
-
-    {{#each allPets}}
-    
-    <div class="card-columns" >
-      <div class="card border-none">
-        <img class="card-img-top" style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
-        <div class="card-body">
-          <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
-          <p class="card-text">Breed: {{this.breed}}</p>
-          <p class="card-text">Owner: {{this.owner.username}}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="like-button">
-        {{#if (isid this.owner._id)}}
-            <form method='POST' action='/pets/like'>
-                <input type='hidden' value='{{this.owner._id}}' name='id'/>
-                <button>Like💚</button>
-            </form>
-        {{/if}}
-    </div>
-
-    {{/each}}
-
-</div> --}}
-
-
 <div class="allPets-page">
 
     {{!-- nav bar --}}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
         <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
-            style="height: 45px; width:45px"></a>
+                style="height: 45px; width:45px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-            <a class="nav-link" href="/user-profile">Profile <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/register-pets">Register Pets</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/pets">See your pets</a>
-            </li>
-        </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user-profile">Profile <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register-pets">Register Pets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pets">See your pets</a>
+                </li>
+            </ul>
         </div>
         <a href="/logout">Log Out</a>
     </nav>
@@ -61,24 +31,27 @@
         {{#each allPets}}
         <div class="col mb-4">
             <div class="card p-5 border-0">
-              <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}" style="width:300px; height: 300px; object-fit:cover">
-              <div class="card-body">
-                <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
-                <p class="card-text">Breed: {{this.breed}}</p>
-                <p class="card-text" >Owner: {{this.owner.username}}</p>
-                
-                <div class="like-button">
-                {{#if (isid this.owner._id)}}
-                    <form action='/pets/like' method='POST'>
-                        <input type='hidden' value="{{this.owner._id}}" name='id'/>
-                        <button class="btn btn-primary btn-lg border-0 active" style="background-color:rgb(188, 147, 212); color:darkcyan" role="button" aria-pressed="true">Like💚</button>
-                    </form>
-                {{/if}}
-            </div>
-            </div>
+                <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}"
+                    style="width:300px; height: 300px; object-fit:cover">
+                <div class="card-body">
+                    <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
+                    <p class="card-text">Breed: {{this.breed}}</p>
+                    <p class="card-text">Owner: {{this.owner.username}}</p>
+
+                    <div class="like-button">
+                        {{#if (isid this.owner._id)}}
+                        <form action='/pets/like' method='POST'>
+                            <input type='hidden' value="{{this.owner._id}}" name='id' />
+                            <button class="btn btn-primary btn-lg border-0 active"
+                                style="background-color:rgb(188, 147, 212); color:darkcyan" role="button"
+                                aria-pressed="true">Like💚</button>
+                        </form>
+                        {{/if}}
+                    </div>
+                </div>
             </div>
         </div>
-    
+
         {{/each}}
     </div>
 </div>

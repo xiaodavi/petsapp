@@ -31,8 +31,8 @@ router.post("/message/history", ensureAuthenticated, (req, res, next) => {
     ],
   })
     .then((messages) => {
-      console.log(messages)
-      console.log(req.session.passport.user)
+      console.log(messages);
+      console.log(req.session.passport.user);
       // console.log(user);
       res.json(messages);
     })
@@ -48,19 +48,20 @@ router.post("/message/add", ensureAuthenticated, (req, res, next) => {
     console.log("sender", senderObj);
     User.findById(receiver).then((receiverObj) => {
       console.log("receiver", receiverObj);
-  Message.create({
-    sender,
-    receiver,
-    body,
-  })
-    .then((message) => {
-      // console.log(user);
-      res.json(message);
-    })
-    .catch((err) => {
-      next(err);
+      Message.create({
+        sender,
+        receiver,
+        body,
+      })
+        .then((message) => {
+          // console.log(user);
+          //Sends a JSON response composed of the specified data. identical to res.send()
+          res.json(message);
+        })
+        .catch((err) => {
+          next(err);
+        });
     });
-});
   });
 });
 
