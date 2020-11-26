@@ -1,4 +1,4 @@
-<h1>Edit your pet here</h1>
+{{!-- <h1>Edit your pet here</h1>
 {{#with pet}}
 <form action="/pets/{{this._id}}/edit" method="POST" enctype="multipart/form-data">
   <label for="petsname">Pet's Name</label>
@@ -14,40 +14,63 @@
 
 </form>
 {{/with}}
-<a href="/">Homepage</a>
+<a href="/">Homepage</a> --}}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
+        <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
+            style="height: 45px; width:45px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+            <a class="nav-link" href="/user-profile">Profile <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/register-pets">See other pets</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/pets">See your pets</a>
+            </li>
+        </ul>
+        </div>
+        <a href="/logout">Log Out</a>
+    </nav>
 
-{{!-- 
-{{#each user.pets}}
-<div>{{name}} </div>
-{{/each}} --}}
+<div class="register-pets-page">
+  
+  <h1> <img src="/images/cat-icons/cat-icon2.png" alt="logo"> Edit your Pets </h1>
+  {{#with pet}}
+  <form action="/pets/{{this._id}}/edit" method="POST" class="needs-validation" enctype="multipart/form-data">
+      <div class="form-row">
 
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Pet's name</label>
+          <input type="text" name="petsname" class="form-control" id="validationCustom01" value="{{petsname}}" required>
+          <div class="valid-feedback">
+            {{message}}
+          </div>
+        </div>
 
-{{!-- views/movie-edit.hbs --}}
-
-{{!-- <h2>Update movie</h2>
-<div class="row">
-  <div class="col-md-6">
-    <form action="/movies/{{_id}}/edit" method="post" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="title-input">Title:</label>
-        <input type="text" name="title" id="title-input" class="form-control" value="{{title}}" />
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02">Breed</label>
+          <input type="text" name="breed" class="form-control" id="validationCustom02" value="{{breed}}" required>
+          <div class="valid-feedback">
+            {{message}}
+          </div>
+        </div>
+        
       </div>
+      <div class="col-md-4 mb-3">
+          <label for="petsimage">Upload an Image </label>
+          <input type="file" name="petsimage" id="petsimage">
+        </div>
 
-      <div class="form-group">
-        <label for="description-input">Description:</label>
-        <textarea name="description" id="description-input" cols="30" rows="4" class="form-control">{{description}}
-        </textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="image-input">Image:</label>
-        <input type="file" name="image" id="image-input" class="form-control-file" />
-        <input type="text" name="existingImage" hidden id="" value="{{imageUrl}}">
-      </div>
-
-      <button type="submit" class="btn btn-success">Save changes</button>
-
+      <div class="col-md-6 mb-3">
+          <button class="btn btn-warning btn-block" type="submit">Edit</button>
+        </div>
     </form>
-  </div>
-</div> --}}
+    {{/with}}
+</div>

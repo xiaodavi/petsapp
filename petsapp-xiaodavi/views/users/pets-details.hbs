@@ -1,33 +1,51 @@
-<a href="/">Home</a>
-<a href="/user-profile">Your Profile</a>
-<a href="/allPets">See All Other Pets</a>
+<div class="pets-details-page">
+    {{!-- nav bar --}}
 
-<h1>Your added the Pets: </h1>
-
-<div style='display:flex; flex-wrap: wrap'>
-    {{#each pets}}
-    <div style='padding:5px; margin:5px'>
-        <p>Pet's Name: {{this.petsname}}</p>
-        <p>Breed: {{this.breed}}</p>
-        <p>Owner: {{this.owner.username}}</p>
-        <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
-
-        {{!-- here add links for edit or delete a pet --}}
-        <div style='display:flex'>
-            <a href="/pets/{{this._id}}/edit"><button>Edit</button></a>
-
-            <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
-                <button type="submit">Delete</button>
-            </form>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
+        <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
+                style="height: 45px; width:45px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user-profile">Profile <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register-pets">Register Pets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/allPets">See other pets</a>
+                </li>
+            </ul>
         </div>
+        <a href="/logout">Log Out</a>
+    </nav>
 
+
+    <h1>Your added the Pets: </h1>
+
+    <div class="pets-details" style='display:flex; flex-wrap: wrap; justify-content:center; align-items:center;'>
+
+        {{#each pets}}
+        <div style='padding:0 50px; margin:5px'>
+            <p>Pet's Name: {{this.petsname}}</p>
+            <p>Breed: {{this.breed}}</p>
+            <p>Owner: {{this.owner.username}}</p>
+            <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
+
+            {{!-- here add links for edit or delete a pet --}}
+            <div style='display:flex; justify-content:space-around; padding: 10px'>
+                <a href="/pets/{{this._id}}/edit"><button class="btn btn-dark">Edit</button></a>
+
+                <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
+                    <button class="btn btn-light" type="submit">Delete</button>
+                </form>
+            </div>
+
+        </div>
+        {{/each}}
     </div>
-
-    {{!-- pestapp.com/:userId/registerpet
-    pestapp.com/:userId/petsdatail
-    pestapp.com/:userId/edit,delete
-    pestapp.com/:userId/pets --}}
-
-
-    {{/each}}
 </div>

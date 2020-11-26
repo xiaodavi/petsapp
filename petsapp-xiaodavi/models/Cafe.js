@@ -20,5 +20,5 @@ const cafeSchema = new Schema (
 )
 
 
-module.exports = model('Pet', petSchema);
+module.exports = model('Cafe', cafeSchema);
 

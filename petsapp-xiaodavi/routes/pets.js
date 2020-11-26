@@ -31,7 +31,7 @@ router.get("/register-pets", ensureAuthenticated, (req, res, next) => {
     });
 });
 
-//
+// Register pets page
 router.post(
   "/register-pets",
   ensureAuthenticated,
@@ -85,6 +85,8 @@ router.get("/allPets", ensureAuthenticated, (req, res, next) => {
     })
     .catch((err) => next(err));
 });
+
+// ??
 
 router.get("/pets/:petsId", ensureAuthenticated, (req, res, next) => {
   const petsId = req.params.petsId;
@@ -150,7 +152,11 @@ router.get("/pets/:id/edit", (req, res, next) => {
     });
 });
 
-router.post("/pets/:id/edit", ensureAuthenticated, uploader.single("petsimage"),(req, res, next) => {
+router.post(
+  "/pets/:id/edit",
+  ensureAuthenticated,
+  uploader.single("petsimage"),
+  (req, res, next) => {
     const { petsname, breed } = req.body;
     const { id } = req.params;
     // console.log(petsname)
@@ -194,14 +200,19 @@ router.post("/pets/:id/delete", ensureAuthenticated, (req, res, next) => {
     });
 });
 
+router.get("/pets/like", (req, res, next) => {
+  res.redirect("/pets/like", { message: req.flash("You liked this pet 💛") });
+});
+
 //when user click on like btn we push their id into the pet's owner array
 // into likedPeople array?
 router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
   const likedPersonId = req.body.id;
   const loggedInUserId = req.user._id;
 
-  User.findByIdAndUpdate(loggedInUserId, 
-    { $push: { likedPeople: likedPersonId } })
+  User.findByIdAndUpdate(loggedInUserId, {
+    $push: { likedPeople: likedPersonId },
+  })
     .then((loggedInUserfromDB) => {
       // console.log(user, req.user);
       //user is the user who liked your pets
@@ -212,23 +223,22 @@ router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
       // } else {
       //   res.redirect("/allPets");
       // }
-      console.log(loggedInUserfromDB)
-      User.findById(likedPersonId)
-      .then(likedPersonfromDB => {
-        if(likedPersonfromDB.likedPeople.includes(loggedInUserId)){
-          console.log(likedPersonfromDB)
+      console.log(loggedInUserfromDB);
+      User.findById(likedPersonId).then((likedPersonfromDB) => {
+        if (likedPersonfromDB.likedPeople.includes(loggedInUserId)) {
+          console.log(likedPersonfromDB);
           // match!
-          res.render('match/matchPage', {likedPersonfromDB})
+          res.render("match/matchPage", { likedPersonfromDB, loggedInUserId });
         } else {
           // don't match
-          console.log(likedPersonfromDB)
-          res.redirect('/allPets')
+          console.log(likedPersonfromDB);
+          res.redirect("/allPets");
         }
-        })
-      })
-      .catch((err) => {
-        next(err);
-      })
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.get('/movie/delete/:id', (req, res, next) => {
