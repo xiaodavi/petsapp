@@ -16,7 +16,7 @@ router.get("/login", (req, res, next) => {
 
 // log in post
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/allPets", // need to be reviewed
+    successRedirect: "/", // need to be reviewed
     failureRedirect: "/login",
     passReqToCallback: true,
   }),
@@ -104,7 +104,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/register-pets",
+    successRedirect: "/",
     failureRedirect: "/", // here you would redirect to the login page using traditional login approach
   })
 );

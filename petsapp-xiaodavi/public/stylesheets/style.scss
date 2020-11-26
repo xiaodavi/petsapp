@@ -218,8 +218,16 @@
 
 // login-home page
 
-.login-home {
-  background-image: url();
+.login-home > .section-2 {
+  width: auto;
+  height: 650px;
+  background-image: url("/images/background/IMG_6238\ copy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-home {
