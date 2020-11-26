@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "PetsApp";
 
 // passport configuration
 const session = require("express-session");
@@ -86,7 +86,7 @@ passport.deserializeUser((id, done) => {
     .then((dbUser) => {
       done(null, dbUser);
       hbs.registerHelper("isid", function (value) {
-        console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
+        // console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
         return JSON.stringify(value) !== JSON.stringify(dbUser._id);
       });
     })
@@ -161,7 +161,11 @@ const auth = require("./routes/auth");
 app.use("/", auth);
 const pets = require("./routes/pets");
 app.use("/", pets);
-// const users = require("./routes/users");
-// app.use("/", users);
+const users = require("./routes/users");
+app.use("/", users);
+const match = require("./routes/match");
+app.use("/", match);
+const message = require("./routes/message");
+app.use("/", message);
 
 module.exports = app;

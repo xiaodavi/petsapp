@@ -1,0 +1,89 @@
+{{#with likedPersonfromDB}}
+
+<h1>You and the {{this.username}} are matched!</h1>
+
+{{/with}}
+
+<h3>To Meet 👇 </h3>
+
+<button id='chat'>Start a Chat / Refresh Chat 💌 </button>
+<a href="/map">Get a Coffee Together 😻</a>
+
+
+<div style='display:none'>
+  <div id='receiver'>{{likedPersonfromDB._id}}</div>
+  <div id='sender'>{{loggedInUserId}}</div>
+</div>
+
+<div class='messenger'>
+  <div class='messageBox'>
+  </div>
+  <textarea id='message' name="comment " placeholder="Say something..."></textarea><br>
+  <button id='send' type=>Send</button>
+</div>
+
+<script>
+  document.querySelector('#chat').onclick = function () {
+    let messenger = document.querySelector('.messenger')
+    if (messenger.style.display == 'block') {
+      messenger.style.display = 'none'
+    } else {
+      messenger.style.display = 'block'
+      renderMessages()
+    }
+
+  }
+
+
+  let receiver = document.querySelector('#receiver').innerText;
+  let sender = document.querySelector('#sender').innerText;
+
+  let messageBox = document.querySelector('.messageBox')
+
+  function renderMessages() {
+    messageBox.innerHTML = ''
+    fetch("http://localhost:3000/message/history", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ receiver, sender })
+    })
+      .then(data => data.json())
+      .then(messages => {
+        console.log(messages)
+        messages.forEach(message => {
+          messageBox.innerHTML += `
+              <div class='${message.sender == sender ? 'sender' : 'receiver'}'>
+                {{!-- if statement --}}
+                  <div >${message.body}</div>
+              </div>
+          `
+        })
+
+      })
+  }
+
+
+
+
+
+
+  document.querySelector('#send').onclick = function () {
+    let body = document.querySelector('#message')
+
+    fetch("http://localhost:3000/message/add", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ receiver, sender, body: body.value })
+    })
+      .finally(() => {
+        renderMessages()
+        body.value = ''
+      })
+  }
+
+
+</script>

@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { uploader, cloudinary } = require("../config/cloudinary");
+const { populate } = require("../models/User");
 
 // middleware function
 function ensureAuthenticated(req, res, next) {
@@ -197,20 +198,36 @@ router.post("/pets/:id/delete", ensureAuthenticated, (req, res, next) => {
     });
 });
 
-//when user click on like btn we push their id into the pet's owner array
+//push liked user into logged user array
 router.post("/pets/like", ensureAuthenticated, (req, res, next) => {
-  const { id } = req.body;
-  console.log(id);
+  const likedPersonId = req.body.id;
+  const loggedInUserId = req.user._id;
 
-  User.findByIdAndUpdate(id, { $push: { likedPeople: req.user._id } })
-    .then((user) => {
-      console.log(user, req.user);
-      //if the ids match we redirect the user in cafe page
-      if (req.user.likedPeople.includes(user._id)) {
-        res.redirect("/cafe");
-      } else {
-        res.redirect("/allPets");
-      }
+  User.findByIdAndUpdate(loggedInUserId, {
+    $push: { likedPeople: likedPersonId },
+  })
+    .then((loggedInUserfromDB) => {
+      // console.log(user, req.user);
+      //user is the user who liked your pets
+      //req.user is the current user who logged in
+      // if (req.user.likedPeople.includes(user._id)) {
+      //   res.render("match/matchPage", {user})
+      //   // res.redirect("/cafe");
+      // } else {
+      //   res.redirect("/allPets");
+      // }
+      console.log(loggedInUserfromDB);
+      User.findById(likedPersonId).then((likedPersonfromDB) => {
+        if (likedPersonfromDB.likedPeople.includes(loggedInUserId)) {
+          console.log(likedPersonfromDB);
+          // match!
+          res.render("match/matchPage", { likedPersonfromDB, loggedInUserId });
+        } else {
+          // don't match
+          console.log(likedPersonfromDB);
+          res.redirect("/allPets");
+        }
+      });
     })
     .catch((err) => {
       next(err);
