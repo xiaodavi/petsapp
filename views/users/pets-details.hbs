@@ -1,6 +1,6 @@
 {{> navbar}}
 <div class="pets-details-page">
-    <h1>Add your pet and start matching!</h1>
+    <h1>Add your pet or start matching!</h1>
     <div class="pets-card" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
             {{#each pets}}
             <div style="padding: 30px">
@@ -11,7 +11,6 @@
                         <p class="card-text">Owner: {{this.owner.username}}</p>
                     <img src="{{this.petsimage}}" class="card-img-bottom rounded" alt="{{this.petsimage}}"
                         style="width:300px; height: 300px; object-fit:cover">
-    
                     </div>
                     {{!-- here add links for edit or delete a pet --}}
                     <div style='display:flex; justify-content:space-around; padding: 10px'>
