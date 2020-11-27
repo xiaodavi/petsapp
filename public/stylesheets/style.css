@@ -306,6 +306,9 @@ textarea {
   justify-content: center;
   align-items: center; }
 
+.signup-home form {
+  padding: 7px; }
+
 .signup-home a {
   color: black; }
 
