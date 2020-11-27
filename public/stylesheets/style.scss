@@ -468,9 +468,9 @@ button {
   font-family: 'Trocchi', serif;
 }
 
-.pets-details-page h1 {
+.pets-details-header h1 {
   text-align: center;
-  padding: 20px;
+  padding-bottom: 40px;
   font-family: 'Trocchi', serif;
 }
 
@@ -517,8 +517,8 @@ button {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
   background-size: cover;
   width: auto;
-  position: relative;
-  // height: 1000px;
+  // position: relative;
+  height: 1000px;
 }
 
 .random-pet-card {
@@ -548,6 +548,9 @@ nav {
 }
 
 .pets-details-header {
+  // background-image: url("/images/background/IMG_6238\ copy.jpg");
+  // background-size: cover;
+  // height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: center;

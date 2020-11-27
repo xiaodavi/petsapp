@@ -380,9 +380,9 @@ button {
   padding: 20px;
   font-family: 'Trocchi', serif; }
 
-.pets-details-page h1 {
+.pets-details-header h1 {
   text-align: center;
-  padding: 20px;
+  padding-bottom: 40px;
   font-family: 'Trocchi', serif; }
 
 .register-pets-page {
@@ -410,7 +410,7 @@ button {
   background-image: url("/images/background/IMG_6238 copy.jpg");
   background-size: cover;
   width: auto;
-  position: relative; }
+  height: 1000px; }
 
 .random-pet-card {
   display: flex;
