@@ -1,6 +1,14 @@
 {{> navbar}}
 <div class="pets-details-page">
-    <h1>Add your pet or start matching!</h1>
+    
+    <div class="pets-details-header">
+        <h1>Add your pet or start matching!</h1>
+        <form action="/register-pets">
+            <button class="btn btn-dark" type="submit">Add a Pet</button>
+         </form>
+    </div>
+
+    {{#if pets}}
     <div class="pets-card" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
             {{#each pets}}
             <div style="padding: 30px">
@@ -14,13 +22,9 @@
                     </div>
                     {{!-- here add links for edit or delete a pet --}}
                     <div style='display:flex; justify-content:space-around; padding: 10px'>
-                        
-                        <form action="/register-pets">
-                            <button class="btn btn-dark" type="submit">Add</button>
-                        </form>
 
                         <form action="/pets/{{this._id}}/edit">
-                            <button class="btn btn-dark" type="submit">Edit</button>
+                            <button class="btn btn-dark" type="submit">Edit 📝</button>
                         </form>
 
                         <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
@@ -31,4 +35,5 @@
             </div>
             {{/each}}
      </div> 
+     {{/if}}
 </div>

@@ -409,7 +409,8 @@ button {
 .pets-details-page {
   background-image: url("/images/background/IMG_6238 copy.jpg");
   background-size: cover;
-  position: relative; }
+  width: auto;
+  height: 680px; }
 
 .random-pet-card {
   display: flex;
@@ -424,5 +425,12 @@ nav {
   background-image: url("/images/background/IMG_6238 copy.jpg");
   background-size: cover;
   height: 700px; }
+
+.pets-details-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px; }
 
 /*# sourceMappingURL=style.css.map */
