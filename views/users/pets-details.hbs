@@ -1,55 +1,35 @@
 {{> navbar}}
-
 <div class="pets-details-page">
-
     <h1>You added the Pets: </h1>
-    <div class="row row-cols-1 row-cols-md-4" style="padding-left: 50px; padding-right: 30px">
-        {{#each allPets}}
-        <div class="col mb-4">
-            <div class="card p-5 border-0">
-                <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}"
-                    style="width:300px; height: 300px; object-fit:cover">
-                <div class="card-body">
-                    <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
-                    <p class="card-text">Breed: {{this.breed}}</p>
-                    <p class="card-text">Owner: {{this.owner.username}}</p>
-
-                    <div class="like-button">
-                        {{#if (isid this.owner._id)}}
-                        <form action='/pets/like' method='POST'>
-                            <input type='hidden' value="{{this.owner._id}}" name='id' />
-                            <button class="btn btn-info btn-lg border-0 active" role="button"
-                                aria-pressed="true">Like 💛 </button>
+    <div class="pets-card">
+            {{#each pets}}
+            <div class="col mb-4" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
+                <div class="card p-5 border-0" style="background-color: rgb(44, 41, 41); color:white; border-radius:1.2rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
+                        <p class="card-text">Breed: {{this.breed}}</p>
+                        <p class="card-text">Owner: {{this.owner.username}}</p>
+                    <img src="{{this.petsimage}}" class="card-img-bottom rounded" alt="{{this.petsimage}}"
+                        style="width:300px; height: 300px; object-fit:cover">
+    
+                    </div>
+                    {{!-- here add links for edit or delete a pet --}}
+                    <div style='display:flex; justify-content:space-around; padding: 10px'>
+                        
+                        <form action="/register-pets">
+                            <button class="btn btn-dark" type="submit">Add</button>
                         </form>
-                        {{/if}}
+
+                        <form action="/pets/{{this._id}}/edit">
+                            <button class="btn btn-dark" type="submit">Edit</button>
+                        </form>
+
+                        <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
+                            <button class="btn btn-light" type="submit">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-
-        {{/each}}
-    </div>
-    
-
-    <div class="pets-details" style='display:flex; flex-wrap: wrap; justify-content:center; align-items:center;'>
-
-        {{#each pets}}
-        <div style='padding:0 50px; margin:5px'>
-            <p>Pet's Name: {{this.petsname}}</p>
-            <p>Breed: {{this.breed}}</p>
-            <p>Owner: {{this.owner.username}}</p>
-            <img style='width:300px; height: 300px; object-fit:cover' src="{{this.petsimage}}" alt="{{this.petsname}}">
-
-            {{!-- here add links for edit or delete a pet --}}
-            <div style='display:flex; justify-content:space-around; padding: 10px'>
-                <a href="/pets/{{this._id}}/edit"><button class="btn btn-dark">Edit</button></a>
-
-                <form action="/pets/{{this._id}}/delete" method="POST" enctype="multipart/form-data">
-                    <button class="btn btn-light" type="submit">Delete</button>
-                </form>
-            </div>
-
-        </div>
-        {{/each}}
-    </div>
+            {{/each}}
+     </div> 
 </div>
