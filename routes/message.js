@@ -16,10 +16,10 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-router.get("/message/history", ensureAuthenticated, (req, res, next) => {
-  // console.log(req.params);
-  res.render("match/chat");
-});
+// router.get("/message/history", ensureAuthenticated, (req, res, next) => {
+//   // console.log(req.params);
+//   res.render("match/chat");
+// });
 
 router.post("/message/history", ensureAuthenticated, (req, res, next) => {
   let { sender, receiver } = req.body;
