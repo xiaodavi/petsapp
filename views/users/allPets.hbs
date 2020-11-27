@@ -1,9 +1,9 @@
 {{> navbar}}
 
 <div class="allPets-page">
-    <div class="pets-card" style="padding: 30px;">
+    <div class="pets-card" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
         {{#each allPets}}
-        <div class="col mb-4" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
+        <div style="padding: 30px">
             <div class="card p-5 border-0" style="background-color: rgb(44, 41, 41); color:white; border-radius:1.2rem;">
                 <div class="card-body">
                     <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}"
