@@ -1,9 +1,9 @@
 {{> navbar}}
 <div class="pets-details-page">
     <h1>You added the Pets: </h1>
-    <div class="pets-card">
+    <div class="pets-card" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
             {{#each pets}}
-            <div class="col mb-4" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
+            <div class="col mb-4">
                 <div class="card p-5 border-0" style="background-color: rgb(44, 41, 41); color:white; border-radius:1.2rem;">
                     <div class="card-body">
                         <h5 class="card-title">Pet's name: {{this.petsname}}</h5>

@@ -273,11 +273,11 @@ a {
   padding-bottom: 50px;
 }
 
-// message
+// message///////////////////////////////////////////////////////////
 .messenger,
 .messageBox {
   padding: 20px;
-  border: 1px solid black;
+  border: 1.5px solid black;
   border-radius: 10px;
 }
 .messenger {
@@ -286,6 +286,7 @@ a {
   bottom: 20px;
   right: 20px;
   width: 50%;
+  background-color: beige;
 }
 textarea {
   width: 100%;
@@ -295,6 +296,7 @@ textarea {
   min-height: 100px;
   max-height: 500px;
   overflow: auto;
+  background-color: white;
 }
 
 .sender {
@@ -315,6 +317,45 @@ textarea {
   visibility: hidden;
 }
 
+// match page
+
+.match-page {
+  width: auto;
+  height: 680px;
+  // background-color: rgba($color: rgb(202, 125, 164), $alpha: 0.8);
+  background-image: url("/images/background/IMG_6238\ copy.jpg");
+}
+
+.match-page h1{
+  padding: 30px;
+  text-align: center;
+}
+
+.match-page .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#chat {
+  padding-left: 10px;
+  padding-right:10px;
+  margin-left: 20px;
+  margin-right: 250px;
+  border-radius: 15px;
+
+
+}
+
+button {
+  border-radius: 15%;
+  color: #fff;
+  background-color: #343a40;
+  border: 1.5px solid rgba(202, 43, 43, 0.842);
+}
+
+//////////////////////////////
 /* Marker tweaks */
 .mapboxgl-popup-close-button {
   display: none;
@@ -477,14 +518,26 @@ textarea {
   position: relative;
 }
 
-.pets-card {
+.random-pet-card {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 nav {
   font-size: 1.2rem;
+}
+
+// .like-button {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+//   align-items: center;
+// }
+
+.allPets-page {
+  background-image: url("/images/background/IMG_6238\ copy.jpg");
+  background-size: cover;
+  height: 700px;
 }

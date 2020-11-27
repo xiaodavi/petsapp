@@ -1,28 +1,31 @@
 {{> navbar}}
 
 <div class="allPets-page">
-    {{!-- pets list --}}
-
-    <div class="row row-cols-1 row-cols-md-4" style="padding-left: 50px; padding-right: 30px">
+    <div class="pets-card" style="padding-top: 35px;">
         {{#each allPets}}
-        <div class="col mb-4">
-            <div id="pets-card" class="card p-5 border-0">
-                <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}"
-                    style="width:300px; height: 300px; object-fit:cover">
+        <div class="col mb-4" style='display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center; align-items:center;'>
+            <div class="card p-5 border-0" style="background-color: rgb(44, 41, 41); color:white; border-radius:1.2rem;">
                 <div class="card-body">
+                    <img src="{{this.petsimage}}" class="card-img-top rounded" alt="{{this.petsimage}}"
+                    style="width:300px; height: 300px; object-fit:cover; padding-bottom: 10px">
                     <h5 class="card-title">Pet's name: {{this.petsname}}</h5>
                     <p class="card-text">Breed: {{this.breed}}</p>
-                    <p class="card-text">Owner: {{this.owner.username}}</p>
+                    {{!-- <p class="card-text">Owner: {{this.owner.username}}</p> --}}
+                </div>
 
-                    <div class="like-button">
+                <div class="like-button" style='display:flex; justify-content:space-around; align-items:center; padding: 10px'>
                         {{#if (isid this.owner._id)}}
                         <form action='/pets/like' method='POST'>
                             <input type='hidden' value="{{this.owner._id}}" name='id' />
-                            <button class="btn btn-info btn-lg border-0 active" role="button"
+                            <button class="btn btn-lg border-0 active" style="background-color:pink; color:black" role="button"
                                 aria-pressed="true">Like 💛 </button>
                         </form>
                         {{/if}}
-                    </div>
+
+                        <form action='/allPets'>
+                            <button class="btn btn-light btn-lg border-0 active" role="button"
+                                aria-pressed="true">Skip 🙃 </button>
+                        </form>
                 </div>
             </div>
         </div>

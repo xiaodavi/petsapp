@@ -1,28 +1,37 @@
 {{> navbar}}
 
-{{#with likedPersonfromDB}}
+<div class="match-page">
 
-<h1>You and the {{this.username}} are matched!</h1>
+    
+  <div class="header">
 
-{{/with}}
-
-<h3>To Meet 👇 </h3>
-
-<button id='chat'>Start a Chat / Refresh Chat 💌 </button>
-<a href="/map">Get a Coffee Together 😻</a>
-
-
-<div style='display:none'>
-  <div id='receiver'>{{likedPersonfromDB._id}}</div>
-  <div id='sender'>{{loggedInUserId}}</div>
-</div>
-
-<div class='messenger'>
-  <div class='messageBox'>
+    {{#with likedPersonfromDB}}
+    
+    <h1>You and <em><strong>{{this.username}}</strong></em> are matched!</h1>
+    
+    {{/with}}
+    
+    <button id='chat'> Start Chat 💌 </button>
+    <a href="/map">Get a Coffee Together ☕️ <br> (coming soon...) </a>
   </div>
-  <textarea id='message' name="comment " placeholder="Say something..."></textarea><br>
-  <button id='send' type=>Send</button>
+  
+  
+  <div style='display:none'>
+    <div id='receiver'>{{likedPersonfromDB._id}}</div>
+    <div id='sender'>{{loggedInUserId}}</div>
+  </div>
+  
+  <div class='messenger'>
+    <div class='messageBox'>
+    </div>
+    <textarea id='message' name="comment " placeholder="Say something..."></textarea><br>
+    <button id='send' type=>Send / Refresh</button>
+  </div>
+
 </div>
+
+
+{{!-- script --}}
 
 <script>
   document.querySelector('#chat').onclick = function () {

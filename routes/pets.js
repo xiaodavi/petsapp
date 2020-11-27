@@ -78,12 +78,18 @@ router.get("/pets", ensureAuthenticated, (req, res, next) => {
 });
 
 router.get("/allPets", ensureAuthenticated, (req, res, next) => {
-  Pet.find()
-    .populate("owner")
-    .then((allPets) => {
-      res.render("users/allPets", { allPets });
-    })
-    .catch((err) => next(err));
+  // Pet.find()
+  //   .populate("owner")
+  //   .then((allPets) => {
+  //     res.render("users/allPets", { allPets });
+  //   })
+  //   .catch((err) => next(err));
+
+  Pet.aggregate([{$sample: {size: 1}}])
+  .then(randomPet => {
+    res.render("users/allPets", {allPets: randomPet})
+  })
+  .catch(err => next(err));
 });
 
 // ??
