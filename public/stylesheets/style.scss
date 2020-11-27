@@ -372,6 +372,10 @@ textarea {
   align-items: center;
 }
 
+.signup-home form {
+  padding: 7px;
+}
+
 .signup-home a {
   color: black;
 }
@@ -446,14 +450,16 @@ textarea {
 }
 
 
-.allPets-page {
-  background-image: url("/images/background/IMG_6238\ copy.jpg");
-}
+// .allPets-page {
+//   background-color:rgb(48, 46, 45);
+//   // background-image: url("/images/background/IMG_6238\ copy.jpg");
+// }
 
-.allPets-page .card {
-  background-color: blanchedalmond;
-  border-radius: 2.25rem;
-}
+// #pets-card {
+//   background-color: rgb(48, 46, 45);
+//   border-radius: 2.25rem;
+//   padding: 20px;
+// }
 
 .userProfile-page {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
@@ -469,4 +475,8 @@ textarea {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
   background-size: cover;
   position: relative;
+}
+
+nav {
+  font-size: 1.2rem;
 }
