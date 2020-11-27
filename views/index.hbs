@@ -26,8 +26,8 @@
 {{#if user}}
 
 <div class="login-home">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style='display:flex; justify-content: space-between'>
-    <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon4.png" alt="logo"
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style='display:flex; justify-content: space-between'>
+    <a class="navbar-brand" href="/"><img src="/images/cat-icons/cat-icon5.png" alt="logo"
         style="height: 50px; width:50px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,20 +38,20 @@
         <li class="nav-item active">
           <a class="nav-link" href="/user-profile">Profile <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/register-pets">Register Pets</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pets">See your pets</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="/pets">See your pet/s</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/allPets">Start Matching 🐈 </a>
         </li>
       </ul>
     </div>
 
      <form action="/logout">
-      <button type="submit" class="btn btn-dark">Log out</button>
+      <button type="submit" class="btn btn-light">Log out</button>
     </form>
     
   </nav>
