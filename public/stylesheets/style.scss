@@ -506,6 +506,7 @@ button {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
   background-size: cover;
   position: relative;
+  // height: 750px;
 }
 
 .userProfile-page .bg-white {
@@ -516,7 +517,8 @@ button {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
   background-size: cover;
   width: auto;
-  height: 680px;
+  position: relative;
+  // height: 1000px;
 }
 
 .random-pet-card {
@@ -540,7 +542,8 @@ nav {
 .allPets-page {
   background-image: url("/images/background/IMG_6238\ copy.jpg");
   background-size: cover;
-  height: 700px;
+  // height: 700px;
+  position: relative;
 }
 
 .pets-details-header {
