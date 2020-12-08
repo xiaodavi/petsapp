@@ -1,5 +1,5 @@
 ### About the App
-This repo holds the codes from our web project - PetsApp - which is a social matching application based on the shared pets picture from users. The main purpose of our app is, to connect the people with their shared interests on pets.
+This repo holds the codes from our web project - PetsApp - which is a social matching application based on the shared pets picture from users. The main purpose of our app is to connect the people with their shared interests on pets.
 
 Feel free to sign up first with an anonymous username and password and try out the feature. If you get matched with other users, you could start a chat with each other. Sounds exciting? 
 
@@ -12,7 +12,8 @@ You can also use the following username and password to test it!
 ```js
 username: iamacat
 password: julia123
-```js
+
+```
 
 ### Features
 
