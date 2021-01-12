@@ -1,35 +1,42 @@
-### About the App
-This repo holds the codes from our web project - PetsApp - which is a social matching application based on the shared pets picture from users. The main purpose of our app is to connect the people with their shared interests on pets.
+# PetsApp | Full-stack App
 
-Feel free to sign up first with an anonymous username and password and try out the feature. If you get matched with other users, you could start a chat with each other. Sounds exciting? 
+A Tinder-like app allowing users to connect, chat and meet based on their shared love for pets.
+ 
 
-👉 Take a look and start matching!
+## Technologies
+- **Language:** `JavaScript`
+- **Frontend:** `Handlebars`, `HTML`, `CSS`, `SASS`
+- **Backend:** `Express.js`, `Node.js`, `MongoDB`, `REST API`
+- **Styling Library:** `Bootstrap`
+
+## Try the deployed app on Heroku
 
 https://petsapp-xiaovid.herokuapp.com/
 
-You can also use the following username and password to test it!
-
-```js
+```
 username: iamacat
 password: julia123
-
 ```
 
-### Features
+## Try the code on your localhost
 
-- Authentication: Signup, Login, Logout
-- Users are able to create, update their profiles with username, password
-- Users are able to register their pets and upload images, and edit, delete the pets as well 🐈
-- Users are able to see a random pet on the start matching page, they can 💚 like or 🙃 skip the pet
-- Once they liked each other's pet, they will be redirected to the chat page, they can start a live chat 💌
+### Step 1 | Fork this repo
 
-### Technologies used
+Click `Fork` to make a copy of this project
 
-- JavaScript
-- Express.js, Node.js, Handlebars, MongoDB, Mongoose
-- CSS, SASS, Bootstrap
+### Step 2 | Clone this repo
+Go to your terminal, navigate to a directory and clone the repo to your local machine
 
+```shell
+$ git clone <Repo-HTTPS>
+```
+### Step 3 | Run the server
+Run the following code within the folder `petsapp`
 
-Enjoy 🐈
+```shell
+$ cd petsapp
+$ npm install
+$ npm run dev
+```
 
-Xiaomei, Davide
+Feel free to contact us if you have any comments or suggestions. :heart:
