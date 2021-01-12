@@ -1,37 +1,37 @@
 {{> navbar}}
 
 <div class="register-pets-page">
-  
+
   <h1> <img src="/images/cat-icons/cat-icon2.png" alt="logo"> Edit your Pets </h1>
   {{#with pet}}
   <form action="/pets/{{this._id}}/edit" method="POST" class="needs-validation" enctype="multipart/form-data">
-      <div class="form-row">
-
-        <div class="col-md-6 mb-3">
-          <label for="validationCustom01">Pet's name</label>
-          <input type="text" name="petsname" class="form-control" id="validationCustom01" value="{{petsname}}" required>
-          <div class="valid-feedback">
-            {{message}}
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label for="validationCustom02">Breed</label>
-          <input type="text" name="breed" class="form-control" id="validationCustom02" value="{{breed}}" required>
-          <div class="valid-feedback">
-            {{message}}
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-md-4 mb-3">
-          <label for="petsimage">Upload an Image </label>
-          <input type="file" name="petsimage" id="petsimage">
-        </div>
+    <div class="form-row">
 
       <div class="col-md-6 mb-3">
-          <button class="btn btn-warning btn-block" type="submit">Edit</button>
+        <label for="validationCustom01">Pet's name</label>
+        <input type="text" name="petsname" class="form-control" id="validationCustom01" value="{{petsname}}" required>
+        <div class="valid-feedback">
+          {{message}}
         </div>
-    </form>
-    {{/with}}
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom02">Breed</label>
+        <input type="text" name="breed" class="form-control" id="validationCustom02" value="{{breed}}" required>
+        <div class="valid-feedback">
+          {{message}}
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="petsimage">Upload an Image </label>
+      <input type="file" name="petsimage" id="petsimage">
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <button class="btn btn-warning btn-block" type="submit">Edit</button>
+    </div>
+  </form>
+  {{/with}}
 </div>

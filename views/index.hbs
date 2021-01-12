@@ -12,11 +12,6 @@
     <form action="/login">
       <button type="submit" class="btn btn-success btn-lg btn-block" style="width: 300px; color:black">Login</button>
     </form>
-    {{!-- <form action="/auth/google">
-      <button type="submit" class="btn btn-warning btn-lg btn-block" style="width: 300px">Login
-          with
-          Google</button>
-    </form> --}}
   </div>
 </div>
 
@@ -50,15 +45,16 @@
       </ul>
     </div>
 
-     <form action="/logout">
+    <form action="/logout">
       <button type="submit" class="btn btn-light">Log out</button>
     </form>
-    
+
   </nav>
-  
+
   <div class="section-2">
     {{#each user}}
-    <img src="/images/cat-icons/cat-icon5.png" alt=""><h1>Welcome to <strong> PetsApp </strong> {{username}}</h1>
+    <img src="/images/cat-icons/cat-icon5.png" alt="">
+    <h1>Welcome to <strong> PetsApp </strong> {{username}}</h1>
     {{/each}}
   </div>
 

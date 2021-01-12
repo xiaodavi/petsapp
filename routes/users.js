@@ -6,23 +6,19 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { uploader, cloudinary } = require("../config/cloudinary");
 
-// middleware function
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    // the user is authenticated
     return next();
   } else {
     res.render("/login");
   }
 }
 
-// profile
 router.get("/user-profile", ensureAuthenticated, (req, res, next) => {
   const userId = req.session.passport.user;
   User.findById(userId)
     .populate("pets")
     .then((user) => {
-      // console.log(user);
       res.render("users/userProfile", { user: user });
     })
     .catch((err) => {
@@ -30,7 +26,6 @@ router.get("/user-profile", ensureAuthenticated, (req, res, next) => {
     });
 });
 
-// edit profile form
 router.get("/user-profile/edit", ensureAuthenticated, (req, res, next) => {
   User.findById(req.session.passport.user)
     .then((user) => {
@@ -41,7 +36,6 @@ router.get("/user-profile/edit", ensureAuthenticated, (req, res, next) => {
     });
 });
 
-// edit profile post
 router.post(
   "/user-profile/edit",
   ensureAuthenticated,

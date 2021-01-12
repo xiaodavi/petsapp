@@ -33,13 +33,10 @@ const debug = require("debug")(
 
 const app = express();
 
-// Middleware Setup
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-// Express View engine setup
 
 app.use(
   require("node-sass-middleware")({
@@ -53,12 +50,10 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
-hbs.registerPartials(path.join(__dirname, "views", "partials"))
+hbs.registerPartials(path.join(__dirname, "views", "partials"));
 
-// default value for title local
 app.locals.title = "PetsApp";
 
-// passport configuration
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
@@ -93,7 +88,6 @@ passport.deserializeUser((id, done) => {
     .then((dbUser) => {
       done(null, dbUser);
       hbs.registerHelper("isid", function (value) {
-        // console.log(JSON.stringify(value) !== JSON.stringify(dbUser._id));
         return JSON.stringify(value) !== JSON.stringify(dbUser._id);
       });
     })
@@ -126,8 +120,6 @@ passport.use(
   )
 );
 
-//Google strategy HERE
-
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 passport.use(
@@ -138,7 +130,6 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      // to see the structure of the data in received response:
       console.log("Google account details:", profile);
 
       User.findOne({ googleID: profile.id })
@@ -147,19 +138,17 @@ passport.use(
             done(null, user);
             return;
           }
-
           User.create({ googleID: profile.id })
             .then((newUser) => {
               done(null, newUser);
             })
-            .catch((err) => done(err)); // closes User.create()
+            .catch((err) => done(err));
         })
-        .catch((err) => done(err)); // closes User.findOne()
+        .catch((err) => done(err));
     }
   )
 );
 
-// for flash messages
 app.use(flash());
 
 const index = require("./routes/index");

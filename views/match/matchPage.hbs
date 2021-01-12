@@ -1,26 +1,17 @@
 {{> navbar}}
 
 <div class="match-page">
-
-    
   <div class="header">
-
     {{#with likedPersonfromDB}}
-    
-    <h1>You and <em><strong>{{this.username}}</strong></em> are matched!</h1>
-    
+      <h1>You and <em><strong>{{this.username}}</strong></em> are matched!</h1>
     {{/with}}
-    
     <button id='chat'> Start Chat 💌 </button>
     <a href="/map">Get a Coffee Together ☕️ <br> (coming soon...) </a>
   </div>
-  
-  
   <div style='display:none'>
     <div id='receiver'>{{likedPersonfromDB._id}}</div>
     <div id='sender'>{{loggedInUserId}}</div>
   </div>
-  
   <div class='messenger'>
     <div class='messageBox'>
     </div>
@@ -29,9 +20,6 @@
   </div>
 
 </div>
-
-
-{{!-- script --}}
 
 <script>
   document.querySelector('#chat').onclick = function () {
@@ -42,9 +30,7 @@
       messenger.style.display = 'block'
       renderMessages()
     }
-
   }
-
 
   let receiver = document.querySelector('#receiver').innerText;
   let sender = document.querySelector('#sender').innerText;
@@ -70,17 +56,11 @@
               </div>
           `
         })
-
       })
   }
 
-
-
-
-
   document.querySelector('#send').onclick = function () {
     let body = document.querySelector('#message')
-
     fetch("/message/add", {
       method: 'POST',
       headers: {
@@ -93,6 +73,4 @@
         body.value = ''
       })
   }
-
-
 </script>

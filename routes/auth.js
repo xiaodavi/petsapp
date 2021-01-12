@@ -4,19 +4,18 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
-//Signup //check naming user or users
 router.get("/signup", (req, res) => {
-    res.render("auth/signup");
-})
+  res.render("auth/signup");
+});
 
-//login-GET
 router.get("/login", (req, res, next) => {
   res.render("auth/login");
 });
 
-// log in post
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/pets", // need to be reviewed
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/pets",
     failureRedirect: "/login",
     passReqToCallback: true,
   }),
@@ -25,24 +24,23 @@ router.post("/login", passport.authenticate("local", {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {
-    if(err) {
+    if (err) {
       return next(err);
     }
-    if(!theUser) {
-      res.render('auth/login', {message: req.flash("Wrong password or username")});
+    if (!theUser) {
+      res.render("auth/login", {
+        message: req.flash("Wrong password or username"),
+      });
       return;
     }
-    req.login(theUser, err => {
-      if(err) {
+    req.login(theUser, (err) => {
+      if (err) {
         return next(err);
       }
-      res.redirect('/')
-    })
-  })(req, res, next)
-})
-
-
-// log out
+      res.redirect("/");
+    });
+  })(req, res, next);
+});
 
 router.get("/logout", (req, res) => {
   req.logout();
@@ -51,7 +49,6 @@ router.get("/logout", (req, res) => {
   console.log("you logged out");
 });
 
-// signup post
 router.post("/signup", (req, res, next) => {
   const { username, password, email, city, state, zip } = req.body;
   if (password.length < 8) {
@@ -68,29 +65,26 @@ router.post("/signup", (req, res, next) => {
     if (found !== null) {
       res.render("auth/signup", { message: "Username is already taken 🙊" });
     } else {
-      // create a user with the username and password
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
 
-      User.create({ 
-        username: username, 
+      User.create({
+        username: username,
         password: hash,
         email: email,
         address: {
           city: city,
           state: state,
-          zip: zip
-        }  
+          zip: zip,
+        },
       })
-      .then(() => res.redirect("/login"))
-      .catch((err) => {
+        .then(() => res.redirect("/login"))
+        .catch((err) => {
           next(err);
-      });
+        });
     }
   });
 });
-
-// Google-login
 
 router.get(
   "/auth/google",
@@ -101,13 +95,13 @@ router.get(
     ],
   })
 );
+
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: "/",
-    failureRedirect: "/", // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/",
   })
 );
-
 
 module.exports = router;
